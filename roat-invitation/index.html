@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7eeed">
+  <title>Roat · Bas Mitzvah</title>
+  <meta name="description" content="You're invited to celebrate Roat's Bas Mitzvah.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main>
+    <header class="hero" id="top">
+      <p class="eyebrow">YOU'RE INVITED TO CELEBRATE</p>
+      <div class="marquee-wrap" aria-label="Roat">
+        <div class="marquee" id="marquee">
+          <div class="bulbs bulbs-top" aria-hidden="true"></div>
+          <div class="marquee-face">
+            <div class="marquee-word" aria-label="ROAT">
+              <span>R</span><span>O</span><span>A</span><span>T</span>
+            </div>
+          </div>
+          <div class="bulbs bulbs-bottom" aria-hidden="true"></div>
+        </div>
+      </div>
+      <h1 class="event-type">BAS MITZVAH</h1>
+      <p class="hero-date">SUNDAY · JANUARY 3, 2027</p>
+      <p class="hero-time">4:00–7:00 PM <span>·</span> BACKYARD PARTY</p>
+      <a class="primary-button" href="#rsvp">COUNT ME IN <span aria-hidden="true">↗</span></a>
+      <p class="hero-note">A night to dance, eat & celebrate.</p>
+    </header>
+
+    <section class="details section">
+      <p class="eyebrow">THE PLAN</p>
+      <h2>We'll bring<br><em>the heat.</em></h2>
+      <p class="details-copy">Come ready to dance, snack, and stay awhile. We'll have heaters and a bonfire to keep things cozy.</p>
+      <div class="food-grid">
+        <article><span class="food-icon">✳</span><h3>SUSHI BAR</h3></article>
+        <article><span class="food-icon">♡</span><h3>SOUP BAR</h3></article>
+        <article><span class="food-icon">✦</span><h3>HOT CHOCOLATE</h3></article>
+      </div>
+      <p class="warm-note">DRESS WARM — IT'S A WINTER NIGHT OUTSIDE.</p>
+    </section>
+
+    <section class="participate section">
+      <p class="eyebrow">HELP MAKE THE NIGHT</p>
+      <h2>Soundtrack<br><em>included.</em></h2>
+      <p>Whether or not you can make it, send Roat a song you love. We'll add the submissions to the party playlist.</p>
+      <form id="song-form" class="form-card">
+        <label>Your name<input name="name" autocomplete="name" required maxlength="100" placeholder="Your name"></label>
+        <label>Song + artist, or a link<input name="song" required maxlength="500" placeholder="Song title, artist, Spotify or YouTube link"></label>
+        <button class="secondary-button" type="submit">SEND A SONG <span>♫</span></button>
+        <p class="form-message" id="song-message" role="status"></p>
+      </form>
+    </section>
+
+    <section class="voice section">
+      <p class="eyebrow">A LITTLE SOMETHING FOR ROAT</p>
+      <h2>Leave her<br><em>your voice.</em></h2>
+      <p>Can't make it? Record a little message for Roat. We'll keep it private and play it at the party, over the music.</p>
+      <div class="form-card recorder-card">
+        <label>Your name<input id="voice-name" maxlength="100" placeholder="Your name" required></label>
+        <div class="recording-time" id="recording-time">00:00 <span>/ 00:30</span></div>
+        <div class="record-controls">
+          <button class="record-button" id="record-button" type="button"><span class="record-dot"></span><span id="record-label">START RECORDING</span></button>
+          <button class="text-button" id="stop-button" type="button" disabled>STOP</button>
+        </div>
+        <audio id="preview-audio" controls hidden></audio>
+        <div class="record-actions">
+          <button class="secondary-button" id="submit-voice" type="button" disabled>SUBMIT MESSAGE ↗</button>
+          <button class="text-button" id="discard-voice" type="button" disabled>RE-RECORD</button>
+        </div>
+        <p class="microcopy">15–30 SECONDS · PRIVATE TO THE FAMILY</p>
+        <p class="form-message" id="voice-message" role="status"></p>
+      </div>
+    </section>
+
+    <section class="rsvp section" id="rsvp">
+      <p class="eyebrow">SAVE YOUR SPOT</p>
+      <h2>Are you<br><em>coming?</em></h2>
+      <form id="rsvp-form" class="form-card">
+        <label>Your name<input name="name" autocomplete="name" required maxlength="100" placeholder="Your name"></label>
+        <label>Email address<input name="email" type="email" autocomplete="email" required maxlength="254" placeholder="you@example.com"></label>
+        <label>Phone number<input name="phone" type="tel" autocomplete="tel" required maxlength="40" placeholder="(555) 555-5555"></label>
+        <label>Are you joining us?
+          <select name="attending" required>
+            <option value="">Choose one</option>
+            <option value="yes">Yes, can't wait!</option>
+            <option value="no">Sorry, can't make it</option>
+          </select>
+        </label>
+        <label>Number of guests, including you
+          <input name="guest_count" type="number" min="1" max="20" value="1" required>
+        </label>
+        <button class="primary-button form-submit" type="submit">SEND RSVP <span>↗</span></button>
+        <p class="form-message" id="rsvp-message" role="status"></p>
+      </form>
+      <p class="still-invited">Can't come? You can still send a song or leave Roat a voice message.</p>
+    </section>
+
+    <footer>
+      <div class="footer-mark">ROAT<span>✳</span></div>
+      <p>BAS MITZVAH · JANUARY 3, 2027</p>
+      <a href="#top">BACK TO THE TOP ↑</a>
+    </footer>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

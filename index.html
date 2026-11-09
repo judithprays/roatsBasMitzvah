@@ -24,24 +24,29 @@
           <div class="marquee-face">
             <svg class="marquee-name-lights" viewBox="0 0 1000 250" role="img" aria-label="רוֹאַת אוֹר" xmlns="http://www.w3.org/2000/svg">
               <defs>
-                <filter id="letter-bulb-glow" x="-80%" y="-80%" width="260%" height="260%">
-                  <feGaussianBlur stdDeviation="3" result="softGlow"/>
-                  <feMerge><feMergeNode in="softGlow"/><feMergeNode in="SourceGraphic"/></feMerge>
-                </filter>
-                <radialGradient id="bulb-glass" cx="38%" cy="32%" r="70%">
-                  <stop offset="0" stop-color="#ffffff"/>
-                  <stop offset=".28" stop-color="#fffdf0"/>
-                  <stop offset=".62" stop-color="#ffe8a8"/>
-                  <stop offset="1" stop-color="#f4a64c"/>
+                <radialGradient id="marquee-bulb-glass" cx="34%" cy="28%" r="72%">
+                  <stop offset="0" stop-color="#fff"/>
+                  <stop offset=".3" stop-color="#fffef5"/>
+                  <stop offset=".68" stop-color="#ffe9ad"/>
+                  <stop offset="1" stop-color="#f4a34b"/>
                 </radialGradient>
-                <pattern id="embedded-marquee-bulbs" patternUnits="userSpaceOnUse" width="68" height="68">
-                  <circle cx="34" cy="34" r="15" fill="#ffc66c" opacity=".48" filter="url(#letter-bulb-glow)"/>
-                  <circle cx="34" cy="34" r="10.5" fill="url(#bulb-glass)" stroke="#fff6d8" stroke-width="1.2"/>
-                  <circle cx="31" cy="30.5" r="3.3" fill="#fff" opacity=".98"/>
+                <filter id="marquee-bulb-bloom" x="-150%" y="-150%" width="400%" height="400%">
+                  <feGaussianBlur stdDeviation="5" result="blur"/>
+                  <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                </filter>
+                <pattern id="marquee-bulb-grid" patternUnits="userSpaceOnUse" width="76" height="76">
+                  <circle cx="38" cy="38" r="17" fill="#ffbd62" opacity=".7" filter="url(#marquee-bulb-bloom)"/>
+                  <circle cx="38" cy="38" r="11.5" fill="url(#marquee-bulb-glass)" stroke="#fff8df" stroke-width="1.4"/>
+                  <circle cx="34.5" cy="34" r="3.5" fill="#fff" opacity=".98"/>
                 </pattern>
+                <mask id="marquee-hebrew-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="1000" height="250">
+                  <rect width="1000" height="250" fill="black"/>
+                  <text x="500" y="165" text-anchor="middle" direction="rtl" unicode-bidi="plaintext" lang="he" font-family="'Noto Sans Hebrew', Arial Black, sans-serif" font-size="112" font-weight="900" letter-spacing="24" word-spacing="70" fill="white">רוֹאַת אוֹר</text>
+                </mask>
               </defs>
-              <text class="hebrew-letter-outline" x="500" y="165" text-anchor="middle" direction="rtl" unicode-bidi="plaintext" lang="he" font-family="'Noto Sans Hebrew', Arial, sans-serif" font-size="112" font-weight="900" letter-spacing="24" word-spacing="70">רוֹאַת אוֹר</text>
-              <text class="hebrew-bulb-inlay" x="500" y="165" text-anchor="middle" direction="rtl" unicode-bidi="plaintext" lang="he" font-family="'Noto Sans Hebrew', Arial, sans-serif" font-size="112" font-weight="900" letter-spacing="24" word-spacing="70">רוֹאַת אוֹר</text>
+              <text class="marquee-letter-depth" x="500" y="165" text-anchor="middle" direction="rtl" unicode-bidi="plaintext" lang="he" font-family="'Noto Sans Hebrew', Arial Black, sans-serif" font-size="112" font-weight="900" letter-spacing="24" word-spacing="70">רוֹאַת אוֹר</text>
+              <text class="marquee-letter-face" x="500" y="165" text-anchor="middle" direction="rtl" unicode-bidi="plaintext" lang="he" font-family="'Noto Sans Hebrew', Arial Black, sans-serif" font-size="112" font-weight="900" letter-spacing="24" word-spacing="70">רוֹאַת אוֹר</text>
+              <rect x="0" y="0" width="1000" height="250" fill="url(#marquee-bulb-grid)" mask="url(#marquee-hebrew-mask)"/>
             </svg>
           </div>
         </div>

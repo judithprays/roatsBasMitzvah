@@ -22,7 +22,22 @@
           <div class="bulbs bulbs-left" aria-hidden="true"><span class="bulb" style="--i:0"></span><span class="bulb" style="--i:1"></span><span class="bulb" style="--i:2"></span><span class="bulb" style="--i:3"></span><span class="bulb" style="--i:4"></span><span class="bulb" style="--i:5"></span><span class="bulb" style="--i:6"></span><span class="bulb" style="--i:7"></span><span class="bulb" style="--i:8"></span><span class="bulb" style="--i:9"></span><span class="bulb" style="--i:10"></span><span class="bulb" style="--i:11"></span><span class="bulb" style="--i:12"></span></div>
           <div class="bulbs bulbs-right" aria-hidden="true"><span class="bulb" style="--i:0"></span><span class="bulb" style="--i:1"></span><span class="bulb" style="--i:2"></span><span class="bulb" style="--i:3"></span><span class="bulb" style="--i:4"></span><span class="bulb" style="--i:5"></span><span class="bulb" style="--i:6"></span><span class="bulb" style="--i:7"></span><span class="bulb" style="--i:8"></span><span class="bulb" style="--i:9"></span><span class="bulb" style="--i:10"></span><span class="bulb" style="--i:11"></span><span class="bulb" style="--i:12"></span></div>
           <div class="marquee-face">
-            <div class="marquee-word hebrew-name" dir="rtl" lang="he" aria-label="רואת אור">רואת אור</div>
+            <svg class="marquee-name-lights" viewBox="0 0 700 190" role="img" aria-label="רואת אור" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <mask id="hebrew-letter-mask">
+                  <rect width="700" height="190" fill="black"/>
+                  <text x="350" y="132" text-anchor="middle" direction="rtl" unicode-bidi="bidi-override" font-family="Arial, sans-serif" font-size="112" font-weight="900" fill="white">רואת אור</text>
+                </mask>
+                <pattern id="marquee-bulb-pattern" width="13" height="13" patternUnits="userSpaceOnUse">
+                  <circle cx="6.5" cy="6.5" r="5" fill="#fff9df" stroke="#fffef3" stroke-width="0.8"/>
+                </pattern>
+                <filter id="marquee-bulb-glow" x="-80%" y="-80%" width="260%" height="260%">
+                  <feGaussianBlur stdDeviation="2.4" result="blur"/>
+                  <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                </filter>
+              </defs>
+              <rect width="700" height="190" fill="url(#marquee-bulb-pattern)" mask="url(#hebrew-letter-mask)" filter="url(#marquee-bulb-glow)"/>
+            </svg>
           </div>
         </div>
       </div>

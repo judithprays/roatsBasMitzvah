@@ -9,17 +9,6 @@ const supabase = SUPABASE_URL && SUPABASE_ANON_KEY
 const $ = (id) => document.getElementById(id);
 const setMessage = (id, message) => { $(id).textContent = message; };
 
-const marqueeBulbs = document.querySelectorAll(".bulbs");
-marqueeBulbs.forEach((row) => {
-  const count = row.classList.contains("bulbs-left") || row.classList.contains("bulbs-right") ? 13 : 29;
-  for (let i = 0; i < count; i++) {
-    const bulb = document.createElement("span");
-    bulb.className = "bulb";
-    bulb.style.animationDelay = `${(i % 7) * 0.17}s`;
-    row.append(bulb);
-  }
-});
-
 function requireSupabase() {
   if (!supabase) {
     throw new Error("The site is not connected to Supabase yet. Add your project URL and anon key in app.js.");

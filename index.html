@@ -8,7 +8,7 @@
   <meta name="description" content="You're invited to celebrate Roat's Bas Mitzvah.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@1,600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800;900&family=Noto+Sans+Hebrew:wght@700;800;900&family=Playfair+Display:ital,wght@1,600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -22,24 +22,14 @@
           <div class="bulbs bulbs-left" aria-hidden="true"><span class="bulb" style="--i:0"></span><span class="bulb" style="--i:1"></span><span class="bulb" style="--i:2"></span><span class="bulb" style="--i:3"></span><span class="bulb" style="--i:4"></span><span class="bulb" style="--i:5"></span><span class="bulb" style="--i:6"></span><span class="bulb" style="--i:7"></span><span class="bulb" style="--i:8"></span><span class="bulb" style="--i:9"></span><span class="bulb" style="--i:10"></span><span class="bulb" style="--i:11"></span><span class="bulb" style="--i:12"></span></div>
           <div class="bulbs bulbs-right" aria-hidden="true"><span class="bulb" style="--i:0"></span><span class="bulb" style="--i:1"></span><span class="bulb" style="--i:2"></span><span class="bulb" style="--i:3"></span><span class="bulb" style="--i:4"></span><span class="bulb" style="--i:5"></span><span class="bulb" style="--i:6"></span><span class="bulb" style="--i:7"></span><span class="bulb" style="--i:8"></span><span class="bulb" style="--i:9"></span><span class="bulb" style="--i:10"></span><span class="bulb" style="--i:11"></span><span class="bulb" style="--i:12"></span></div>
           <div class="marquee-face">
-            <svg class="marquee-name-lights" viewBox="0 0 700 190" role="img" aria-label="רואת אור" xmlns="http://www.w3.org/2000/svg">
+            <svg class="marquee-name-lights" viewBox="0 0 700 190" role="img" aria-label="רוֹאַת אוֹר" xmlns="http://www.w3.org/2000/svg">
               <defs>
-                <filter id="single-bulb-glow" x="-60%" y="-60%" width="220%" height="220%">
-                  <feGaussianBlur stdDeviation="2.2" result="blur"/>
+                <filter id="single-bulb-glow" x="-50%" y="-50%" width="200%" height="200%">
+                  <feGaussianBlur stdDeviation="2.4" result="blur"/>
                   <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
                 </filter>
               </defs>
-              <g class="name-bulb-lines" filter="url(#single-bulb-glow)">
-                <!-- אור — drawn as individual marquee strokes -->
-                <path d="M48 67 H88 Q98 67 98 78 V126"/>
-                <path d="M143 54 V126"/>
-                <path d="M184 124 L220 58 L252 124 M199 96 H237"/>
-                <!-- רואת -->
-                <path d="M318 58 H382 M382 58 V126 M318 126 L344 101"/>
-                <path d="M416 124 L452 58 L484 124 M431 96 H469"/>
-                <path d="M526 54 V126"/>
-                <path d="M570 67 H610 Q620 67 620 78 V126"/>
-              </g>
+              <text class="hebrew-bulb-strokes" x="350" y="132" text-anchor="middle" direction="rtl" unicode-bidi="plaintext" lang="he" font-family="'Noto Sans Hebrew', Arial, sans-serif" font-size="112" font-weight="800" filter="url(#single-bulb-glow)">רוֹאַת אוֹר</text>
             </svg>
           </div>
         </div>

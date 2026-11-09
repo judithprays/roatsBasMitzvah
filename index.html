@@ -24,19 +24,22 @@
           <div class="marquee-face">
             <svg class="marquee-name-lights" viewBox="0 0 700 190" role="img" aria-label="רואת אור" xmlns="http://www.w3.org/2000/svg">
               <defs>
-                <mask id="hebrew-letter-mask">
-                  <rect width="700" height="190" fill="black"/>
-                  <text x="350" y="132" text-anchor="middle" direction="rtl" unicode-bidi="bidi-override" font-family="Arial, sans-serif" font-size="112" font-weight="900" fill="white">רואת אור</text>
-                </mask>
-                <pattern id="marquee-bulb-pattern" width="13" height="13" patternUnits="userSpaceOnUse">
-                  <circle cx="6.5" cy="6.5" r="5" fill="#fff9df" stroke="#fffef3" stroke-width="0.8"/>
-                </pattern>
-                <filter id="marquee-bulb-glow" x="-80%" y="-80%" width="260%" height="260%">
-                  <feGaussianBlur stdDeviation="2.4" result="blur"/>
+                <filter id="single-bulb-glow" x="-60%" y="-60%" width="220%" height="220%">
+                  <feGaussianBlur stdDeviation="2.2" result="blur"/>
                   <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
                 </filter>
               </defs>
-              <rect width="700" height="190" fill="url(#marquee-bulb-pattern)" mask="url(#hebrew-letter-mask)" filter="url(#marquee-bulb-glow)"/>
+              <g class="name-bulb-lines" filter="url(#single-bulb-glow)">
+                <!-- אור — drawn as individual marquee strokes -->
+                <path d="M48 67 H88 Q98 67 98 78 V126"/>
+                <path d="M143 54 V126"/>
+                <path d="M184 124 L220 58 L252 124 M199 96 H237"/>
+                <!-- רואת -->
+                <path d="M318 58 H382 M382 58 V126 M318 126 L344 101"/>
+                <path d="M416 124 L452 58 L484 124 M431 96 H469"/>
+                <path d="M526 54 V126"/>
+                <path d="M570 67 H610 Q620 67 620 78 V126"/>
+              </g>
             </svg>
           </div>
         </div>

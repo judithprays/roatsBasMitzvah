@@ -11,7 +11,8 @@ const setMessage = (id, message) => { $(id).textContent = message; };
 
 const marqueeBulbs = document.querySelectorAll(".bulbs");
 marqueeBulbs.forEach((row) => {
-  for (let i = 0; i < 25; i++) {
+  const count = row.classList.contains("bulbs-left") || row.classList.contains("bulbs-right") ? 13 : 29;
+  for (let i = 0; i < count; i++) {
     const bulb = document.createElement("span");
     bulb.className = "bulb";
     bulb.style.animationDelay = `${(i % 7) * 0.17}s`;

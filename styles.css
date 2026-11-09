@@ -13,7 +13,8 @@ main { overflow: hidden; }
 .marquee { position: relative; padding: 30px; border-radius: 16px; background: linear-gradient(145deg, #edc4ca, #c9798d 55%, #e5b5be); box-shadow: inset 0 2px 3px #fff9, inset 0 -5px 12px #8e435b55, 0 0 0 2px #e7c2b8, 0 0 0 6px #d48d9d; }
 .marquee-face { position: relative; z-index: 1; min-height: clamp(160px, 29vw, 310px); display: grid; place-items: center; border: 2px solid #fff0df; border-radius: 8px; background: radial-gradient(ellipse at 50% 45%, #f6dfe0, #d68d9d 95%); box-shadow: inset 0 0 28px #9b526044; }
 .marquee-name-lights { display: block; width: min(100%, 1000px); height: auto; overflow: visible; padding: 8px 18px; }
-.hebrew-letter-outline { fill: none; stroke: #fff1d8; stroke-width: 2.5px; stroke-linecap: round; stroke-linejoin: round; opacity: .9; }\n.hebrew-bulb-strokes { fill: none; stroke: #fff9df; stroke-width: 8px; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 0 36px; animation: name-bulb-flicker 2.8s ease-in-out infinite alternate; }
+.hebrew-letter-outline { fill: none; stroke: #fff1d8; stroke-width: 2.5px; stroke-linecap: round; stroke-linejoin: round; opacity: .9; }
+.hebrew-bulb-strokes { fill: none; stroke: #fff9df; stroke-width: 8px; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 0 36px; animation: name-bulb-flicker 2.8s ease-in-out infinite alternate; }
 .bulbs { display: flex; justify-content: space-around; align-items: center; z-index: 3; pointer-events: none; }
 .bulbs-top, .bulbs-bottom { position: absolute; left: 25px; right: 25px; height: 13px; }
 .bulbs-top { top: 8px; }.bulbs-bottom { bottom: 8px; }

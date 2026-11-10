@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7eeed">
+  <title>Family Dashboard · Roat</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+  <main class="dashboard">
+    <header class="dash-header">
+      <div><p class="eyebrow">ROAT'S BAS MITZVAH</p><h1>Family dashboard</h1></div>
+      <button id="sign-out" class="quiet-button" hidden>Sign out</button>
+    </header>
+    <section id="login-panel" class="panel login-panel">
+      <h2>Family access</h2>
+      <p>We'll email a one-time sign-in code to the family admin account.</p>
+      <button id="send-code" class="primary-button">EMAIL ME A CODE</button>
+      <form id="code-form" hidden>
+        <label for="admin-code">Six-digit code</label>
+        <input id="admin-code" inputmode="numeric" autocomplete="one-time-code" maxlength="6" required>
+        <button class="primary-button" type="submit">OPEN DASHBOARD</button>
+      </form>
+      <p id="login-message" role="status"></p>
+    </section>
+    <section id="data-panel" hidden>
+      <div class="stats">
+        <article class="stat"><span>YES RSVPS</span><strong id="yes-count">0</strong></article>
+        <article class="stat"><span>EXPECTED GUESTS</span><strong id="guest-count">0</strong></article>
+        <article class="stat"><span>CAN'T MAKE IT</span><strong id="no-count">0</strong></article>
+        <article class="stat"><span>SONG REQUESTS</span><strong id="song-count">0</strong></article>
+      </div>
+      <section class="panel">
+        <div class="section-heading"><div><p class="eyebrow">THE GUEST LIST</p><h2>RSVPs</h2></div><button id="export-rsvps" class="quiet-button">EXPORT CSV ↓</button></div>
+        <div class="table-wrap"><table><thead><tr><th>Name</th><th>Email</th><th>Phone</th><th>Attending</th><th>Guests</th><th>Received</th></tr></thead><tbody id="rsvp-rows"></tbody></table></div>
+      </section>
+      <section class="panel">
+        <div class="section-heading"><div><p class="eyebrow">THE PLAYLIST</p><h2>Song requests</h2></div><button id="export-songs" class="quiet-button">EXPORT CSV ↓</button></div>
+        <div class="table-wrap"><table><thead><tr><th>Name</th><th>Song</th><th>Received</th></tr></thead><tbody id="song-rows"></tbody></table></div>
+      </section>
+      <section class="panel">
+        <div class="section-heading"><div><p class="eyebrow">MESSAGES FOR ROAT</p><h2>Voice notes</h2></div></div>
+        <div id="voice-list" class="voice-list"></div>
+      </section>
+      <p id="dashboard-message" role="status"></p>
+    </section>
+    <footer>JANUARY 3, 2027 · FAMILY ONLY</footer>
+  </main>
+  <script src="admin.js"></script>
+</body>
+</html>

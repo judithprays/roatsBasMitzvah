@@ -156,7 +156,8 @@ function clean_(value, max) {
 }
 function reply_(ok, message, requestId) {
   const safe = JSON.stringify({ ok: ok, message: message, requestId: requestId }).replace(/</g, "\\u003c");
-  return HtmlService.createHtmlOutput("<!doctype html><script>window.top.postMessage(" + safe + ", '*');</script>");
+  return HtmlService.createHtmlOutput("<!doctype html><script>window.top.postMessage(" + safe + ", '*');</script>")
+    .setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL);
 }
 function jsonp_(data, callback) {
   const json = JSON.stringify(data).replace(/</g, "\\u003c");

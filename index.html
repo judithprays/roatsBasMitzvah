@@ -34,7 +34,8 @@
     </header>
 
     <section class="details section heat-section">
-      <video class="heat-video" autoplay muted loop playsinline aria-hidden="true">
+      <video class="heat-video" autoplay muted loop playsinline preload="metadata" aria-hidden="true">
+        <source src="257593_tiny.mp4" type="video/mp4" media="(max-width: 700px)">
         <source src="fire.mp4" type="video/mp4">
       </video>
       <div class="heat-overlay" aria-hidden="true"></div>
@@ -68,7 +69,7 @@
           <button class="secondary-button" id="submit-voice" type="button" disabled>SUBMIT MESSAGE ↗</button>
           <button class="text-button" id="discard-voice" type="button" disabled>RE-RECORD</button>
         </div>
-        <p class="microcopy">15–30 SECONDS · PRIVATE TO THE FAMILY</p>
+        <p class="microcopy">UP TO 30 SECONDS · PRIVATE TO THE FAMILY</p>
         <p class="form-message" id="voice-message" role="status"></p>
       </div>
     </section>

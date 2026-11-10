@@ -27,7 +27,16 @@ main { overflow: hidden; }
 .primary-button:hover, .secondary-button:hover { transform: translateY(-2px); box-shadow: 0 10px 20px #30252a22; }
 .hero-note { font-family: "Playfair Display", serif; font-style: italic; color: var(--muted); font-size: 16px; margin: 25px 0 0; }
 .section { padding: 100px 22px; text-align: center; }.section h2 { font-size: clamp(48px, 9vw, 86px); line-height: .92; letter-spacing: -.07em; margin: 0 0 24px; font-weight: 900; }.section h2 em { color: var(--deep); font-family: "Playfair Display", serif; font-weight: 600; letter-spacing: -.06em; }
-.details { background: #f0dadd; }.details-copy, .participate > p:not(.eyebrow), .voice > p:not(.eyebrow) { max-width: 490px; margin: 0 auto; color: var(--muted); line-height: 1.7; font-size: 15px; }
+.details { background: #f0dadd; }
+.heat-section { position: relative; isolation: isolate; overflow: hidden; color: var(--white); background: #211b1b; }
+.heat-video, .heat-overlay { position: absolute; inset: 0; width: 100%; height: 100%; }
+.heat-video { z-index: -2; object-fit: cover; }
+.heat-overlay { z-index: -1; background: linear-gradient(180deg, #160f0dc2, #160f0d8c 48%, #160f0dc9); }
+.heat-content { position: relative; z-index: 0; }
+.heat-section .eyebrow, .heat-section .details-copy, .heat-section .warm-note { color: #fff4e8; }
+.heat-section h2 em { color: #ffd2a3; }
+.heat-section .food-grid article { background: #fff8efdf; color: var(--ink); }
+.details-copy, .participate > p:not(.eyebrow), .voice > p:not(.eyebrow) { max-width: 490px; margin: 0 auto; color: var(--muted); line-height: 1.7; font-size: 15px; }
 .food-grid { width: min(100%, 920px); margin: 46px auto 30px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; align-items: stretch; }.food-grid article { min-width: 0; min-height: 142px; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #f9eeecaa; border-radius: 14px; padding: 24px 10px; }.food-icon { color: var(--deep); font-size: 30px; line-height: 1; min-height: 32px; display: grid; place-items: center; }.food-grid h3 { font-size: 10px; line-height: 1.35; letter-spacing: .12em; margin: 14px 0 0; }.warm-note { font-size: 10px; letter-spacing: .15em; font-weight: 800; color: var(--deep); margin: 32px 0 0; }
 .participate { background: var(--paper); }.voice { background: #f0dadd; }.rsvp { background: #f9f3ef; }
 .form-card { width: min(100%, 480px); margin: 34px auto 0; padding: 26px; background: #fffaf5; border: 1px solid #e9d3d2; border-radius: 18px; box-shadow: 0 14px 35px #8e52600d; text-align: left; }

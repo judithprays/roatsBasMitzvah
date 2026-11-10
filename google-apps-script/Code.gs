@@ -44,7 +44,8 @@ function setup() {
 function doPost(e) {
   try {
     const p = (e && e.parameter) || {};
-    if (p.website) return reply_(false, "Submission rejected.");
+    const requestId = clean_(p.request_id, 100);
+    if (p.website) return reply_(false, "Submission rejected.", requestId);
     const ss = SpreadsheetApp.openById(requiredProp_("SPREADSHEET_ID"));
     const now = new Date();
 
@@ -58,7 +59,7 @@ function doPost(e) {
         throw new Error("Please provide a name and valid email address.");
       }
       ss.getSheetByName("RSVPs").appendRow([now, name, email, phone, attending, guests]);
-      return reply_(true, "Your RSVP is in. Thank you!");
+      return reply_(true, "Your RSVP is in. Thank you!", requestId);
     }
 
     if (p.action === "song") {
@@ -66,7 +67,7 @@ function doPost(e) {
       const song = clean_(p.song, 500);
       if (!name || !song) throw new Error("Please add your name and song.");
       ss.getSheetByName("Songs").appendRow([now, name, song]);
-      return reply_(true, "Song submitted! Roat's playlist just got better.");
+      return reply_(true, "Song submitted! Roat's playlist just got better.", requestId);
     }
 
     if (p.action === "voice") {
@@ -83,12 +84,13 @@ function doPost(e) {
       const folder = DriveApp.getFolderById(requiredProp_("VOICE_FOLDER_ID"));
       const file = folder.createFile(blob);
       ss.getSheetByName("VoiceMessages").appendRow([now, name, file.getId(), file.getName(), duration, type]);
-      return reply_(true, "Your message is saved. Roat will hear it at the party!");
+      return reply_(true, "Your message is saved. Roat will hear it at the party!", requestId);
     }
 
     throw new Error("Unknown submission.");
   } catch (err) {
-    return reply_(false, err.message || "Something went wrong. Please try again.");
+    const p = (e && e.parameter) || {};
+    return reply_(false, err.message || "Something went wrong. Please try again.", clean_(p.request_id, 100));
   }
 }
 
@@ -152,9 +154,9 @@ function requiredProp_(key) {
 function clean_(value, max) {
   return String(value || "").trim().slice(0, max);
 }
-function reply_(ok, message) {
-  const safe = JSON.stringify({ ok: ok, message: message }).replace(/</g, "\\u003c");
-  return HtmlService.createHtmlOutput("<!doctype html><script>window.parent.postMessage(" + safe + ", '*');</script>");
+function reply_(ok, message, requestId) {
+  const safe = JSON.stringify({ ok: ok, message: message, requestId: requestId }).replace(/</g, "\\u003c");
+  return HtmlService.createHtmlOutput("<!doctype html><script>window.top.postMessage(" + safe + ", '*');</script>");
 }
 function jsonp_(data, callback) {
   const json = JSON.stringify(data).replace(/</g, "\\u003c");

@@ -3,6 +3,15 @@ const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx78EWiMxap6D
 
 const $ = (id) => document.getElementById(id);
 const setMessage = (id, message) => { $(id).textContent = message; };
+let toastTimer;
+function showToast(message, isError = false) {
+  const toast = $("site-toast");
+  toast.textContent = message;
+  toast.classList.toggle("is-error", isError);
+  toast.classList.add("is-visible");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => toast.classList.remove("is-visible"), 4800);
+}
 
 document.querySelectorAll(".bulbs").forEach((row) => {
   for (let i = 0; i < 25; i++) {
@@ -19,7 +28,8 @@ function submitToGoogle(action, fields, messageId, successMessage) {
       reject(new Error("The invitation is not connected yet. The family still needs to finish the Google setup."));
       return;
     }
-    const frameName = "google-submit-" + Date.now();
+    const requestId = window.crypto?.randomUUID?.() || `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+    const frameName = "google-submit-" + requestId.replace(/[^a-zA-Z0-9_-]/g, "");
     const frame = document.createElement("iframe");
     frame.name = frameName;
     frame.hidden = true;
@@ -29,7 +39,7 @@ function submitToGoogle(action, fields, messageId, successMessage) {
     form.target = frameName;
     form.hidden = true;
 
-    const values = { action, ...fields, website: "" };
+    const values = { action, ...fields, website: "", request_id: requestId };
     Object.entries(values).forEach(([name, value]) => {
       const input = document.createElement("input");
       input.type = "hidden";
@@ -45,15 +55,20 @@ function submitToGoogle(action, fields, messageId, successMessage) {
       frame.remove();
     };
     const onMessage = (event) => {
-      if (event.source !== frame.contentWindow || !event.data || typeof event.data.ok !== "boolean") return;
+      if (!event.data || event.data.requestId !== requestId || typeof event.data.ok !== "boolean") return;
       if (finished) return;
       finished = true;
       cleanup();
       if (event.data.ok) {
-        if (messageId) setMessage(messageId, event.data.message || successMessage || "Saved!");
+        const confirmation = event.data.message || successMessage || "Saved!";
+        if (messageId) setMessage(messageId, confirmation);
+        showToast(confirmation);
         resolve(event.data);
       } else {
-        reject(new Error(event.data.message || "Something went wrong. Please try again."));
+        const error = event.data.message || "Something went wrong. Please try again.";
+        if (messageId) setMessage(messageId, error);
+        showToast(error, true);
+        reject(new Error(error));
       }
     };
     window.addEventListener("message", onMessage);
@@ -64,7 +79,10 @@ function submitToGoogle(action, fields, messageId, successMessage) {
       if (finished) return;
       finished = true;
       cleanup();
-      reject(new Error("We couldn't confirm the submission. Please try again."));
+      const error = "We couldn't confirm the submission. Please check your connection and try again.";
+      if (messageId) setMessage(messageId, error);
+      showToast(error, true);
+      reject(new Error(error));
     }, 25000);
   });
 }

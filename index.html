@@ -33,29 +33,23 @@
       <p class="hero-note">A night to dance, farb, nosh & celebrate!!!</p>
     </header>
 
-    <section class="details section">
-      <p class="eyebrow">THE PLAN</p>
-      <h2>We'll bring<br><em>the heat.</em></h2>
-      <p class="details-copy">We'll have heaters and a bonfire to keep things cozy.</p>
-      <div class="food-grid">
-        <article><span class="food-icon">✳</span><h3>SUSHI BAR</h3></article>
-        <article><span class="food-icon">♡</span><h3>SOUP BAR</h3></article>
-        <article><span class="food-icon">✦</span><h3>HOT CHOCOLATE</h3></article>
-        <article><span class="food-icon">✦</span><h3>SMORES</h3></article>
+    <section class="details section heat-section">
+      <video class="heat-video" autoplay muted loop playsinline aria-hidden="true">
+        <source src="fire.mp4" type="video/mp4">
+      </video>
+      <div class="heat-overlay" aria-hidden="true"></div>
+      <div class="heat-content">
+        <p class="eyebrow">THE PLAN</p>
+        <h2>We'll bring<br><em>the heat.</em></h2>
+        <p class="details-copy">We'll have heaters and a bonfire to keep things cozy.</p>
+        <div class="food-grid">
+          <article><span class="food-icon">✳</span><h3>SUSHI BAR</h3></article>
+          <article><span class="food-icon">♡</span><h3>SOUP BAR</h3></article>
+          <article><span class="food-icon">✦</span><h3>HOT CHOCOLATE</h3></article>
+          <article><span class="food-icon">🔥</span><h3>SMORES</h3></article>
+        </div>
+        <p class="warm-note">DRESS WARM — IT'S A WINTER NIGHT OUTSIDE.</p>
       </div>
-      <p class="warm-note">DRESS WARM — IT'S A WINTER NIGHT OUTSIDE.</p>
-    </section>
-
-    <section class="participate section">
-      <p class="eyebrow">HELP GET THE DANCE PARTY STARTED</p>
-      <h2>The soundtrack<br><em>needs you.</em></h2>
-      <p>Send Roat a song you love, it might end up on the party playlist.</p>
-      <form id="song-form" class="form-card">
-        <label>Your name<input name="name" autocomplete="name" required maxlength="100" placeholder="Your name"></label>
-        <label>Song + artist, or a link<input name="song" required maxlength="500" placeholder="Song title, artist, Spotify or YouTube link"></label>
-        <button class="secondary-button" type="submit">SEND A SONG <span>♫</span></button>
-        <p class="form-message" id="song-message" role="status"></p>
-      </form>
     </section>
 
     <section class="voice section">
@@ -77,6 +71,18 @@
         <p class="microcopy">15–30 SECONDS · PRIVATE TO THE FAMILY</p>
         <p class="form-message" id="voice-message" role="status"></p>
       </div>
+    </section>
+
+    <section class="participate section">
+      <p class="eyebrow">HELP GET THE DANCE PARTY STARTED</p>
+      <h2>The soundtrack<br><em>needs you.</em></h2>
+      <p>Send Roat a song you love, it might end up on the party playlist.</p>
+      <form id="song-form" class="form-card">
+        <label>Your name<input name="name" autocomplete="name" required maxlength="100" placeholder="Your name"></label>
+        <label>Song + artist, or a link<input name="song" required maxlength="500" placeholder="Song title, artist, Spotify or YouTube link"></label>
+        <button class="secondary-button" type="submit">SEND A SONG <span>♫</span></button>
+        <p class="form-message" id="song-message" role="status"></p>
+      </form>
     </section>
 
     <section class="rsvp section" id="rsvp">

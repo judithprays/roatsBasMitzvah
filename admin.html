@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7eeed">
+  <title>Family Dashboard · Roat</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar"><a href="./" class="wordmark">ROAT<span>✳</span></a><span>FAMILY DASHBOARD</span></header>
+    <section id="login-panel" class="login-panel">
+      <p class="eyebrow">JUST FOR THE FAMILY</p>
+      <h1>All the love,<br><em>in one place.</em></h1>
+      <p>Sign in with the family admin email to see RSVPs, song requests, and private voice messages.</p>
+      <form id="login-form">
+        <label>Email address<input name="email" type="email" autocomplete="email" required placeholder="Your family admin email"></label>
+        <button class="button" type="submit">EMAIL ME A SIGN-IN LINK ↗</button>
+      </form>
+      <p class="message" id="login-message" role="status"></p>
+    </section>
+    <section id="dashboard" hidden>
+      <div class="dashboard-heading"><div><p class="eyebrow">THE GUEST LIST</p><h1>Roat's people.</h1></div><button class="quiet-button" id="sign-out">SIGN OUT</button></div>
+      <p class="message" id="dashboard-message" role="status"></p>
+      <div class="stats">
+        <article><span>YES</span><strong id="yes-count">—</strong></article>
+        <article><span>GUESTS EXPECTED</span><strong id="guest-count">—</strong></article>
+        <article><span>CAN'T MAKE IT</span><strong id="no-count">—</strong></article>
+        <article><span>SONGS</span><strong id="song-count">—</strong></article>
+      </div>
+      <section class="data-section"><div class="section-heading"><h2>RSVPs</h2><button class="quiet-button export" data-export="rsvps">DOWNLOAD CSV ↓</button></div><div id="rsvp-list" class="table-wrap"></div></section>
+      <section class="data-section"><div class="section-heading"><h2>Song requests</h2><button class="quiet-button export" data-export="songs">DOWNLOAD CSV ↓</button></div><div id="song-list" class="table-wrap"></div></section>
+      <section class="data-section"><div class="section-heading"><h2>Voice messages</h2><span class="private-note">PRIVATE TO THE FAMILY</span></div><div id="voice-list" class="voice-list"></div></section>
+    </section>
+    <footer>ROAT · BAS MITZVAH · JANUARY 3, 2027</footer>
+  </main>
+  <script type="module" src="admin.js"></script>
+</body>
+</html>

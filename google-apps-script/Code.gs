@@ -4,7 +4,7 @@
  * Public submissions are accepted; admin reads require an email one-time code.
  */
 
-const ADMIN_EMAIL = "them allingers@gmail.com";
+const ADMIN_EMAIL = "themallingers@gmail.com";
 const PROP = PropertiesService.getScriptProperties();
 
 function setup() {

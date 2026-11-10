@@ -98,6 +98,9 @@ function doGet(e) {
   try {
     let result;
     if (p.action === "sendCode") {
+      const cache = CacheService.getScriptCache();
+      if (cache.get("admin_code_cooldown")) throw new Error("Please wait a minute before requesting another code.");
+      cache.put("admin_code_cooldown", "1", 60);
       const code = String(Math.floor(100000 + Math.random() * 900000));
       CacheService.getScriptCache().put("admin_code", code, 600);
       MailApp.sendEmail(ADMIN_EMAIL, "Roat's Bas Mitzvah dashboard sign-in", "Your sign-in code is " + code + ". It expires in 10 minutes.");

@@ -129,7 +129,6 @@ let elapsedTimer;
 let startedAt = 0;
 let seconds = 0;
 const MAX_SECONDS = 30;
-const MIN_SECONDS = 15;
 
 function updateClock() {
   $("recording-time").innerHTML = `00:${String(seconds).padStart(2, "0")} <span>/ 00:30</span>`;
@@ -169,14 +168,12 @@ $("record-button").addEventListener("click", async () => {
       audioUrl = URL.createObjectURL(audioBlob);
       $("preview-audio").src = audioUrl;
       $("preview-audio").hidden = false;
-      $("submit-voice").disabled = seconds < MIN_SECONDS;
+      $("submit-voice").disabled = false;
       $("discard-voice").disabled = false;
       $("record-label").textContent = "RECORD AGAIN";
       recordingStream?.getTracks().forEach(track => track.stop());
       recordingStream = null;
-      setMessage("voice-message", seconds < MIN_SECONDS
-        ? "Please record at least 15 seconds."
-        : "Listen back, then submit when you're happy with it.");
+      setMessage("voice-message", "Listen back, then submit when you're happy with it.");
     };
     recorder.start();
     startedAt = Date.now();
@@ -222,8 +219,8 @@ function blobToBase64(blob) {
 $("submit-voice").addEventListener("click", async () => {
   const name = $("voice-name").value.trim();
   if (!name) { setMessage("voice-message", "Please add your name first."); return; }
-  if (!audioBlob || seconds < MIN_SECONDS || seconds > MAX_SECONDS) {
-    setMessage("voice-message", "Please record a message between 15 and 30 seconds.");
+  if (!audioBlob || seconds > MAX_SECONDS) {
+    setMessage("voice-message", "Please record a message up to 30 seconds.");
     return;
   }
   $("submit-voice").disabled = true;

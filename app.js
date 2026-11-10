@@ -99,6 +99,7 @@ $("rsvp-form").addEventListener("submit", async (event) => {
   };
   const button = event.currentTarget.querySelector('button[type="submit"]');
   button.disabled = true;
+  showToast("Sending your RSVP…");
   try {
     await submitToGoogle("rsvp", payload, "rsvp-message");
     event.currentTarget.reset();

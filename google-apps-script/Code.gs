@@ -103,7 +103,7 @@ function doGet(e) {
       const requestId = clean_(p.request_id, 100);
       if (!requestId) throw new Error("Missing request ID.");
       const saved = CacheService.getScriptCache().get("submission_" + requestId);
-      if (!saved) throw new Error("PENDING");
+      if (!saved) return jsonp_({ pending: true }, callback);
       return jsonp_(JSON.parse(saved), callback);
     } else     if (p.action === "sendCode") {
       const cache = CacheService.getScriptCache();

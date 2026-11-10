@@ -1,9 +1,8 @@
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+import { SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY } from "./supabase-config.js";
 
-const SUPABASE_URL = "";
-const SUPABASE_ANON_KEY = "";
-const supabase = SUPABASE_URL && SUPABASE_ANON_KEY
-  ? createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+const supabase = SUPABASE_URL && SUPABASE_PUBLISHABLE_KEY
+  ? createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY)
   : null;
 
 const $ = (id) => document.getElementById(id);
@@ -21,7 +20,7 @@ marqueeBulbs.forEach((row) => {
 
 function requireSupabase() {
   if (!supabase) {
-    throw new Error("The site is not connected to Supabase yet. Add your project URL and anon key in app.js.");
+    throw new Error("The site is not connected to Supabase yet. Add your Supabase URL and publishable key in supabase-config.js.");
   }
 }
 

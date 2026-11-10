@@ -22,69 +22,59 @@ document.querySelectorAll(".bulbs").forEach((row) => {
   }
 });
 
-function submitToGoogle(action, fields, messageId, successMessage) {
+function checkSubmission(requestId, timeoutMs = 20000) {
   return new Promise((resolve, reject) => {
-    if (!GOOGLE_SCRIPT_URL) {
-      reject(new Error("The invitation is not connected yet. The family still needs to finish the Google setup."));
-      return;
-    }
-    const requestId = window.crypto?.randomUUID?.() || `${Date.now()}-${Math.random().toString(36).slice(2)}`;
-    const frameName = "google-submit-" + requestId.replace(/[^a-zA-Z0-9_-]/g, "");
-    const frame = document.createElement("iframe");
-    frame.name = frameName;
-    frame.hidden = true;
-    const form = document.createElement("form");
-    form.method = "POST";
-    form.action = GOOGLE_SCRIPT_URL;
-    form.target = frameName;
-    form.hidden = true;
-
-    const values = { action, ...fields, website: "", request_id: requestId };
-    Object.entries(values).forEach(([name, value]) => {
-      const input = document.createElement("input");
-      input.type = "hidden";
-      input.name = name;
-      input.value = String(value ?? "");
-      form.append(input);
-    });
-
-    let finished = false;
+    const callbackName = "__submission_" + requestId.replace(/[^a-zA-Z0-9_]/g, "");
+    const started = Date.now();
+    let timer;
     const cleanup = () => {
-      window.removeEventListener("message", onMessage);
-      form.remove();
-      frame.remove();
+      clearTimeout(timer);
+      delete window[callbackName];
+      script.remove();
     };
-    const onMessage = (event) => {
-      if (!event.data || event.data.requestId !== requestId || typeof event.data.ok !== "boolean") return;
-      if (finished) return;
-      finished = true;
+    const script = document.createElement("script");
+    window[callbackName] = (result) => {
       cleanup();
-      if (event.data.ok) {
-        const confirmation = event.data.message || successMessage || "Saved!";
-        if (messageId) setMessage(messageId, confirmation);
-        showToast(confirmation);
-        resolve(event.data);
-      } else {
-        const error = event.data.message || "Something went wrong. Please try again.";
-        if (messageId) setMessage(messageId, error);
-        showToast(error, true);
-        reject(new Error(error));
-      }
+      if (result?.ok) resolve(result);
+      else reject(new Error(result?.message || result?.error || "We couldn't save that submission. Please try again."));
     };
-    window.addEventListener("message", onMessage);
-    document.body.append(frame, form);
-    form.submit();
-    // A timeout prevents a stuck form from leaving the UI disabled forever.
-    window.setTimeout(() => {
-      if (finished) return;
-      finished = true;
+    const poll = () => {
+      script.src = `${GOOGLE_SCRIPT_URL}?action=submissionStatus&request_id=${encodeURIComponent(requestId)}&callback=${callbackName}&_=${Date.now()}`;
+    };
+    script.onerror = () => {
       cleanup();
-      const error = "We couldn't confirm the submission. Please check your connection and try again.";
-      if (messageId) setMessage(messageId, error);
-      showToast(error, true);
-      reject(new Error(error));
-    }, 25000);
+      reject(new Error("We couldn't confirm the submission. Please try again."));
+    };
+    timer = window.setTimeout(() => {
+      cleanup();
+      reject(new Error("We couldn't confirm the submission. Please try again."));
+    }, timeoutMs);
+    document.head.append(script);
+    poll();
   });
+}
+
+async function submitToGoogle(action, fields, messageId, successMessage) {
+  if (!GOOGLE_SCRIPT_URL) {
+    throw new Error("The invitation is not connected yet. The family still needs to finish the Google setup.");
+  }
+  const requestId = window.crypto?.randomUUID?.() || `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+  const values = { action, ...fields, website: "", request_id: requestId };
+  const body = new URLSearchParams();
+  Object.entries(values).forEach(([name, value]) => body.set(name, String(value ?? "")));
+
+  // no-cors allows the browser to POST to Apps Script without trying to frame its response.
+  await fetch(GOOGLE_SCRIPT_URL, {
+    method: "POST",
+    mode: "no-cors",
+    body
+  });
+
+  const result = await checkSubmission(requestId);
+  const confirmation = result.message || successMessage || "Saved!";
+  if (messageId) setMessage(messageId, confirmation);
+  showToast(confirmation);
+  return result;
 }
 
 $("rsvp-form").addEventListener("submit", async (event) => {

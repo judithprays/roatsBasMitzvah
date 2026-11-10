@@ -22,18 +22,27 @@ document.querySelectorAll(".bulbs").forEach((row) => {
   }
 });
 
-function checkSubmission(requestId, timeoutMs = 20000) {
+function checkSubmission(requestId, timeoutMs = 25000) {
   return new Promise((resolve, reject) => {
     const callbackName = "__submission_" + requestId.replace(/[^a-zA-Z0-9_]/g, "");
     const started = Date.now();
     let timer;
+    const script = document.createElement("script");
     const cleanup = () => {
       clearTimeout(timer);
       delete window[callbackName];
       script.remove();
     };
-    const script = document.createElement("script");
     window[callbackName] = (result) => {
+      if (result?.pending) {
+        if (Date.now() - started >= timeoutMs) {
+          cleanup();
+          reject(new Error("We couldn't confirm the submission. Please try again."));
+          return;
+        }
+        window.setTimeout(poll, 700);
+        return;
+      }
       cleanup();
       if (result?.ok) resolve(result);
       else reject(new Error(result?.message || result?.error || "We couldn't save that submission. Please try again."));

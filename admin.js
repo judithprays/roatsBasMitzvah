@@ -1,5 +1,5 @@
 // Set this to the deployed Apps Script web app URL (same URL used in app.js).
-const GOOGLE_SCRIPT_URL = "";
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx78EWiMxap6DAg5SIWL9fX9BO0bodsGOaHaQfzMZAODX8hCIpZ284RRJ0AJh-U84E9/exec";
 const $ = (id) => document.getElementById(id);
 let dashboardData = { rsvps: [], songs: [], voices: [] };
 

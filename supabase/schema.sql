@@ -74,3 +74,13 @@ using (
   bucket_id = 'voice-messages'
   and (auth.jwt() ->> 'email') = 'REPLACE_WITH_FAMILY_ADMIN_EMAIL'
 );
+
+
+-- Explicit Data API privileges for the public invitation forms and signed-in family dashboard.
+grant insert on public.rsvps to anon, authenticated;
+grant insert on public.song_submissions to anon, authenticated;
+grant insert on public.voice_messages to anon, authenticated;
+grant select on public.rsvps to authenticated;
+grant select on public.song_submissions to authenticated;
+grant select on public.voice_messages to authenticated;
+grant usage, select on all sequences in schema public to anon, authenticated;

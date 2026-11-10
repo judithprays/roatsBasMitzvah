@@ -99,7 +99,13 @@ function doGet(e) {
   const callback = /^[a-zA-Z_$][\w.$]*$/.test(p.callback || "") ? p.callback : "";
   try {
     let result;
-    if (p.action === "sendCode") {
+    if (p.action === "submissionStatus") {
+      const requestId = clean_(p.request_id, 100);
+      if (!requestId) throw new Error("Missing request ID.");
+      const saved = CacheService.getScriptCache().get("submission_" + requestId);
+      if (!saved) throw new Error("PENDING");
+      return jsonp_(JSON.parse(saved), callback);
+    } else     if (p.action === "sendCode") {
       const cache = CacheService.getScriptCache();
       if (cache.get("admin_code_cooldown")) throw new Error("Please wait a minute before requesting another code.");
       cache.put("admin_code_cooldown", "1", 60);
@@ -155,9 +161,12 @@ function clean_(value, max) {
   return String(value || "").trim().slice(0, max);
 }
 function reply_(ok, message, requestId) {
-  const safe = JSON.stringify({ ok: ok, message: message, requestId: requestId }).replace(/</g, "\\u003c");
-  return HtmlService.createHtmlOutput("<!doctype html><script>window.top.postMessage(" + safe + ", '*');</script>")
-    .setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL);
+  const result = { ok: ok, message: message, requestId: requestId };
+  if (requestId) {
+    CacheService.getScriptCache().put("submission_" + requestId, JSON.stringify(result), 600);
+  }
+  return ContentService.createTextOutput(JSON.stringify(result))
+    .setMimeType(ContentService.MimeType.JSON);
 }
 function jsonp_(data, callback) {
   const json = JSON.stringify(data).replace(/</g, "\\u003c");

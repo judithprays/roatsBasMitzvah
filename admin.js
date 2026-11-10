@@ -38,14 +38,15 @@ function renderSongs(rows) {
 }
 async function renderVoices(rows) {
   if (!rows.length) { $("voice-list").innerHTML = '<p class="empty">No voice messages yet.</p>'; return; }
-  $("voice-list").innerHTML = rows.map(r => `<article class="voice-row"><div><strong>${escapeHtml(r.name)}</strong><span>${r.duration_seconds}s · ${dateLabel(r.created_at)}</span></div><button class="quiet-button" data-audio-path="${escapeHtml(r.storage_path)}">PLAY / DOWNLOAD ↓</button></article>`).join("");
-  $("voice-list").querySelectorAll("[data-audio-path]").forEach(button => button.addEventListener("click", async () => {
-    button.disabled = true; button.textContent = "PREPARING…";
-    const { data, error } = await supabase.storage.from("voice-messages").createSignedUrl(button.dataset.audioPath, 60 * 10, { download: true });
-    if (error) { button.disabled = false; button.textContent = "TRY AGAIN"; message("dashboard-message", error.message); return; }
-    window.open(data.signedUrl, "_blank", "noopener");
-    button.disabled = false; button.textContent = "PLAY / DOWNLOAD ↓";
+  $("voice-list").innerHTML = '<p class="empty">Preparing private audio links…</p>';
+  const items = await Promise.all(rows.map(async r => {
+    const [listen, download] = await Promise.all([
+      supabase.storage.from("voice-messages").createSignedUrl(r.storage_path, 60 * 10),
+      supabase.storage.from("voice-messages").createSignedUrl(r.storage_path, 60 * 10, { download: true })
+    ]);
+    return { row: r, listenUrl: listen.data?.signedUrl, downloadUrl: download.data?.signedUrl, error: listen.error || download.error };
   }));
+  $("voice-list").innerHTML = items.map(({ row, listenUrl, downloadUrl, error }) => `<article class="voice-row"><div class="voice-details"><strong>${escapeHtml(row.name)}</strong><span>${Number(row.duration_seconds || 0)}s · ${dateLabel(row.created_at)}</span>${error ? `<span class="audio-error">${escapeHtml(error.message)}</span>` : `<audio controls preload="none" src="${escapeHtml(listenUrl)}">Your browser does not support audio playback.</audio>`}</div>${downloadUrl ? `<a class="quiet-button download-link" href="${escapeHtml(downloadUrl)}">DOWNLOAD ↓</a>` : ""}</article>`).join("");
 }
 async function loadDashboard() {
   message("dashboard-message", "Loading responses…");

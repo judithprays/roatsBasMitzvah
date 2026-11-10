@@ -30,9 +30,9 @@ main { overflow: hidden; }
 .details { background: #f0dadd; }
 .heat-section { position: relative; isolation: isolate; overflow: hidden; color: var(--white); background: #211b1b; }
 .heat-video, .heat-overlay { position: absolute; inset: 0; width: 100%; height: 100%; }
-.heat-video { z-index: -2; object-fit: cover; }
-.heat-overlay { z-index: -1; background: linear-gradient(180deg, #160f0dc2, #160f0d8c 48%, #160f0dc9); }
-.heat-content { position: relative; z-index: 0; }
+.heat-video { z-index: 0; display: block; object-fit: cover; object-position: center; pointer-events: none; }
+.heat-overlay { z-index: 1; background: linear-gradient(180deg, #160f0dc2, #160f0d8c 48%, #160f0dc9); pointer-events: none; }
+.heat-content { position: relative; z-index: 2; }
 .heat-section .eyebrow, .heat-section .details-copy, .heat-section .warm-note { color: #fff4e8; }
 .heat-section h2 em { color: #ffd2a3; }
 .heat-section .food-grid article { background: #fff8efdf; color: var(--ink); }

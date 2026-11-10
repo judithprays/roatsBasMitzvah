@@ -105,7 +105,7 @@ function doGet(e) {
       const saved = CacheService.getScriptCache().get("submission_" + requestId);
       if (!saved) return jsonp_({ pending: true }, callback);
       return jsonp_(JSON.parse(saved), callback);
-    } else     if (p.action === "sendCode") {
+    } else if (p.action === "sendCode") {
       const cache = CacheService.getScriptCache();
       if (cache.get("admin_code_cooldown")) throw new Error("Please wait a minute before requesting another code.");
       cache.put("admin_code_cooldown", "1", 60);

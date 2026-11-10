@@ -1,5 +1,5 @@
 // Paste the deployed Google Apps Script web app URL here after setup.
-const GOOGLE_SCRIPT_URL = "";
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx78EWiMxap6DAg5SIWL9fX9BO0bodsGOaHaQfzMZAODX8hCIpZ284RRJ0AJh-U84E9/exec";
 
 const $ = (id) => document.getElementById(id);
 const setMessage = (id, message) => { $(id).textContent = message; };

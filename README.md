@@ -7,7 +7,7 @@ A small, mobile-friendly invitation site for Roat's Bas Mitzvah.
 - Public invitation page (anyone with the link can view it)
 - RSVP form: name, email, phone, attendance, guest count
 - Song submissions by song/artist text or URL
-- In-browser voice recording with a 15–30 second limit
+- In-browser voice recording with no duration limit (subject to upload-size limits)
 - Private Supabase storage for voice recordings
 - Supabase schema with public insert / private family-read policies
 

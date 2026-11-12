@@ -64,8 +64,8 @@ footer { padding: 55px 20px; background: var(--ink); color: var(--paper); text-a
 .photo-section {
   position: relative;
   width: 100%;
-  min-height: 100vh;
-  min-height: 100svh;
+  min-height: 125vh;
+  min-height: 125svh;
   overflow: hidden;
   background: #171719;
 }
@@ -129,8 +129,8 @@ footer { padding: 55px 20px; background: var(--ink); color: var(--paper); text-a
 }
 .mad-section {
   position: relative;
-  min-height: 78vh;
-  min-height: 78svh;
+  min-height: 110vh;
+  min-height: 110svh;
   overflow: hidden;
   display: grid;
   place-items: end center;
@@ -171,6 +171,6 @@ footer { padding: 55px 20px; background: var(--ink); color: var(--paper); text-a
     padding: 18px 23px;
     font-size: 26px;
   }
-  .mad-section { min-height: 65svh; }
+  .mad-section { min-height: 95svh; }
   .mad-section h2 { width: calc(100% - 32px); padding-bottom: 36px; }
 }

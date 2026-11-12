@@ -127,6 +127,7 @@ let recordingStream;
 let elapsedTimer;
 let startedAt = 0;
 let seconds = 0;
+const MAX_RECORDING_SECONDS = 30;
 
 function updateClock() {
   const minutes = Math.floor(seconds / 60);
@@ -186,6 +187,7 @@ $("record-button").addEventListener("click", async () => {
     elapsedTimer = setInterval(() => {
       seconds = Math.floor((Date.now() - startedAt) / 1000);
       updateClock();
+      if (seconds >= MAX_RECORDING_SECONDS) stopRecording();
     }, 250);
   } catch (error) { setMessage("voice-message", error.message); }
 });

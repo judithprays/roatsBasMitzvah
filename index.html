@@ -58,7 +58,7 @@
       <p>An inside joke? A word of wisdom? A compliment? A shriek of excitement?? Record a note for Roat, and you may just hear it on the dance floor!</p>
       <div class="form-card recorder-card">
         <label>Your name<input id="voice-name" maxlength="100" placeholder="Your name" required></label>
-        <div class="recording-time" id="recording-time">00:00 <span>/ 00:30</span></div>
+        <div class="recording-time" id="recording-time">00:00</div>
         <div class="record-controls">
           <button class="record-button" id="record-button" type="button"><span class="record-dot"></span><span id="record-label">START RECORDING</span></button>
           <button class="text-button" id="stop-button" type="button" disabled>STOP</button>
@@ -68,7 +68,7 @@
           <button class="secondary-button" id="submit-voice" type="button" disabled>SUBMIT MESSAGE ↗</button>
           <button class="text-button" id="discard-voice" type="button" disabled>RE-RECORD</button>
         </div>
-        <p class="microcopy">15–30 SECONDS · PRIVATE TO THE FAMILY</p>
+        <p class="microcopy">RECORD AS LONG AS YOU LIKE · PRIVATE TO THE FAMILY</p>
         <p class="form-message" id="voice-message" role="status"></p>
       </div>
     </section>
@@ -85,9 +85,13 @@
       </form>
     </section>
 
+    <section class="mad-section" aria-label="Are you coming or what?">
+      <img src="mad.jpg" alt="A playful invitation to Roat's Bas Mitzvah" loading="lazy">
+      <h2>Are you coming or what?</h2>
+    </section>
+
     <section class="rsvp section" id="rsvp">
       <p class="eyebrow">SAVE YOUR SPOT</p>
-      <h2>So, are you<br><em>coming or what?</em></h2>
       <form id="rsvp-form" class="form-card">
         <label>Your name<input name="name" autocomplete="name" required maxlength="100" placeholder="Your name"></label>
         <label>Email address<input name="email" type="email" autocomplete="email" required maxlength="254" placeholder="you@example.com"></label>

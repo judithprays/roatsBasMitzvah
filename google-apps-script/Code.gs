@@ -75,7 +75,7 @@ function doPost(e) {
       const duration = Number(p.duration_seconds);
       const encoded = p.audio_base64 || "";
       if (!name) throw new Error("Please add your name.");
-      if (duration < 15 || duration > 30) throw new Error("Voice messages must be 15–30 seconds.");
+      if (!Number.isFinite(duration) || duration <= 0) throw new Error("Please record a voice message before submitting.");
       if (!encoded || encoded.length > 8000000) throw new Error("The recording is missing or too large. Please try again.");
       const bytes = Utilities.base64Decode(encoded);
       const type = clean_(p.content_type || "audio/webm", 80);

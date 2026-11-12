@@ -192,7 +192,6 @@ $("record-button").addEventListener("click", async () => {
 function stopRecording() {
   if (recorder?.state === "recording") {
     clearInterval(elapsedTimer);
-    clearTimeout(stopTimer);
     seconds = Math.floor((Date.now() - startedAt) / 1000);
     updateClock();
     recorder.stop();

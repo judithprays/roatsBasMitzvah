@@ -78,3 +78,46 @@ footer { padding: 55px 20px; background: var(--ink); color: var(--paper); text-a
 @media (max-width: 600px) {
   .photo-section img { object-position: center 42%; }
 }
+
+
+/* A little hello from Roat */
+.photo-speech-bubble {
+  position: absolute;
+  z-index: 2;
+  top: 9%;
+  right: 8%;
+  max-width: min(330px, 42vw);
+  padding: 20px 27px;
+  border: 3px solid var(--ink);
+  border-radius: 28px 28px 28px 8px;
+  background: #fff7f2;
+  color: var(--ink);
+  box-shadow: 6px 7px 0 #f06a9a;
+  font-family: "DM Sans", sans-serif;
+  font-size: clamp(19px, 2.5vw, 30px);
+  font-weight: 800;
+  line-height: 1.08;
+  text-align: center;
+  transform: rotate(4deg);
+}
+.photo-speech-bubble::after {
+  content: "";
+  position: absolute;
+  left: 25px;
+  bottom: -19px;
+  width: 25px;
+  height: 25px;
+  background: #fff7f2;
+  border-left: 3px solid var(--ink);
+  border-bottom: 3px solid var(--ink);
+  transform: skew(-18deg) rotate(-35deg);
+}
+@media (max-width: 600px) {
+  .photo-speech-bubble {
+    top: 6%;
+    right: 6%;
+    max-width: 230px;
+    padding: 15px 19px;
+    font-size: 21px;
+  }
+}

@@ -94,26 +94,26 @@ footer { padding: 55px 20px; background: var(--ink); color: var(--paper); text-a
 }
 
 
-/* A little hello from Roat */
+/* A little hello from Roat — keep it in the empty black space above her */
 .photo-speech-bubble {
   position: absolute;
-  z-index: 2;
-  top: 59%;
-  left: 42%;
-  right: auto;
-  max-width: min(430px, 52vw);
-  padding: 25px 34px;
+  z-index: 3;
+  top: 5%;
+  right: 5%;
+  left: auto;
+  max-width: min(460px, 54vw);
+  padding: 27px 38px;
   border: 3px solid var(--ink);
-  border-radius: 28px 28px 28px 8px;
+  border-radius: 30px 30px 30px 8px;
   background: #fff7f2;
   color: var(--ink);
-  box-shadow: 6px 7px 0 #f06a9a;
+  box-shadow: 7px 8px 0 #f06a9a;
   font-family: "DM Sans", sans-serif;
-  font-size: clamp(25px, 3.2vw, 40px);
+  font-size: clamp(28px, 3.8vw, 44px);
   font-weight: 800;
   line-height: 1.08;
   text-align: center;
-  transform: rotate(4deg);
+  transform: rotate(3deg);
 }
 .photo-speech-bubble::after {
   content: "";
@@ -127,13 +127,50 @@ footer { padding: 55px 20px; background: var(--ink); color: var(--paper); text-a
   border-bottom: 3px solid var(--ink);
   transform: skew(-18deg) rotate(-35deg);
 }
+.mad-section {
+  position: relative;
+  min-height: 78vh;
+  min-height: 78svh;
+  overflow: hidden;
+  display: grid;
+  place-items: end center;
+  isolation: isolate;
+  background: #2b1e23;
+}
+.mad-section img {
+  position: absolute;
+  z-index: -2;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+.mad-section::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background: linear-gradient(0deg, #24151dc9 0%, #24151d20 52%, #24151d12 100%);
+}
+.mad-section h2 {
+  width: min(100% - 40px, 1000px);
+  margin: 0 auto;
+  padding: 0 0 clamp(38px, 7vw, 82px);
+  color: #fff8f4;
+  font: 800 clamp(42px, 8vw, 100px)/.95 "DM Sans", sans-serif;
+  letter-spacing: -.07em;
+  text-align: center;
+  text-shadow: 0 3px 28px #24151d80;
+}
 @media (max-width: 600px) {
   .photo-speech-bubble {
-    top: 62%;
-    left: 34%;
-    right: auto;
-    max-width: 260px;
-    padding: 18px 22px;
-    font-size: 25px;
+    top: 4%;
+    right: 4%;
+    max-width: 72vw;
+    padding: 18px 23px;
+    font-size: 26px;
   }
+  .mad-section { min-height: 65svh; }
+  .mad-section h2 { width: calc(100% - 32px); padding-bottom: 36px; }
 }

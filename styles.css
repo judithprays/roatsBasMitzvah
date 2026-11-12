@@ -95,34 +95,14 @@ footer { padding: 55px 20px; background: var(--ink); color: var(--paper); text-a
 
 
 /* A little hello from Roat — keep it in the empty black space above her */
-.photo-speech-bubble {
-  position: absolute;
-  z-index: 3;
-  top: 5%;
-  right: 5%;
-  left: auto;
-  width: min(900px, calc(100% - 40px));
-  max-width: none;
-  padding: 0;
-  border: 0;
-  border-radius: 0;
-  background: transparent;
-  color: #fff8f4;
-  box-shadow: none;
-  font: 900 clamp(48px, 9vw, 86px)/.92 "DM Sans", sans-serif;
-  letter-spacing: -.07em;
-  text-align: center;
-  text-shadow: 0 3px 28px #24151d80;
-  transform: none;
-}
-.photo-speech-bubble::after { display: none; }
+
 .mad-section {
   position: relative;
   min-height: 110vh;
   min-height: 110svh;
   overflow: hidden;
   display: grid;
-  place-items: end center;
+  place-items: start center;
   isolation: isolate;
   background: #2b1e23;
 }
@@ -153,25 +133,62 @@ footer { padding: 55px 20px; background: var(--ink); color: var(--paper); text-a
   inset: 0;
   background: linear-gradient(0deg, #24151dc9 0%, #24151d20 52%, #24151d12 100%);
 }
-.mad-section h2 {
-  width: min(100% - 40px, 1000px);
-  margin: 0 auto;
-  padding: 0 0 clamp(38px, 7vw, 82px);
+.photo-section {
+  position: relative;
+  width: 100%;
+  min-height: 125vh;
+  min-height: 125svh;
+  overflow: hidden;
+  background: #171719;
+}
+.photo-section img {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 60%;
+  filter: grayscale(1);
+}
+.photo-section::after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  background: #ce8798;
+  opacity: .34;
+  mix-blend-mode: color;
+  pointer-events: none;
+}
+/* Match the regular section heading placement and editorial type hierarchy. */
+.photo-heading {
+  position: absolute;
+  z-index: 3;
+  top: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(1000px, calc(100% - 44px));
+  margin: 0;
+  padding: 0;
   color: #fff8f4;
   font: 900 clamp(48px, 9vw, 86px)/.92 "DM Sans", sans-serif;
   letter-spacing: -.07em;
   text-align: center;
   text-shadow: 0 3px 28px #24151d80;
 }
+.photo-heading em {
+  color: #ffd2df;
+  font-family: "Playfair Display", serif;
+  font-weight: 600;
+  letter-spacing: -.06em;
+}
 @media (max-width: 600px) {
-  .photo-speech-bubble {
-    top: 4%;
-    right: 0;
-    left: 0;
-    width: calc(100% - 32px);
-    margin: 0 auto;
+  .mad-section { min-height: 95svh; }
+  .photo-heading {
+    top: 76px;
+    width: calc(100% - 36px);
     font-size: clamp(42px, 10vw, 58px);
   }
-  .mad-section { min-height: 95svh; }
-  .mad-section h2 { width: calc(100% - 32px); padding-bottom: 36px; }
+  .photo-section img { object-position: center 55%; }
 }

@@ -134,14 +134,17 @@ function resetRecording() {
   audioBlob = null;
   if (audioUrl) URL.revokeObjectURL(audioUrl);
   audioUrl = null;
-  $("preview-audio").hidden = true;
   $("preview-audio").removeAttribute("src");
+  $("voice-review").hidden = true;
+  $("record-controls").hidden = false;
+  $("record-button").hidden = false;
   $("record-button").disabled = false;
   $("record-button").classList.remove("is-recording");
   $("record-label").textContent = "START RECORDING";
+  $("stop-button").hidden = true;
   $("stop-button").disabled = true;
   $("submit-voice").disabled = true;
-  $("discard-voice").disabled = true;
+  $("voice-name").value = "";
   seconds = 0;
   updateClock();
 }
@@ -158,10 +161,9 @@ $("record-button").addEventListener("click", async () => {
       audioBlob = new Blob(chunks, { type: recorder.mimeType || "audio/webm" });
       audioUrl = URL.createObjectURL(audioBlob);
       $("preview-audio").src = audioUrl;
-      $("preview-audio").hidden = false;
+      $("record-controls").hidden = true;
+      $("voice-review").hidden = false;
       $("submit-voice").disabled = seconds === 0;
-      $("discard-voice").disabled = false;
-      $("record-label").textContent = "RECORD AGAIN";
       recordingStream?.getTracks().forEach(track => track.stop());
       recordingStream = null;
       setMessage("voice-message", "Listen back, then submit when you're happy with it.");
@@ -172,9 +174,9 @@ $("record-button").addEventListener("click", async () => {
     updateClock();
     $("record-button").classList.add("is-recording");
     $("record-label").textContent = "RECORDING…";
+    $("stop-button").hidden = false;
     $("stop-button").disabled = false;
     $("submit-voice").disabled = true;
-    $("discard-voice").disabled = true;
     elapsedTimer = setInterval(() => {
       seconds = Math.floor((Date.now() - startedAt) / 1000);
       updateClock();
@@ -189,6 +191,7 @@ function stopRecording() {
     updateClock();
     recorder.stop();
     $("record-button").classList.remove("is-recording");
+    $("stop-button").hidden = true;
     $("stop-button").disabled = true;
   }
 }
@@ -208,7 +211,7 @@ function blobToBase64(blob) {
 }
 $("submit-voice").addEventListener("click", async () => {
   const name = $("voice-name").value.trim();
-  if (!name) { setMessage("voice-message", "Please add your name first."); return; }
+  if (!name) { setMessage("voice-message", "Please add your name first."); $("voice-name").focus(); return; }
   if (!audioBlob || seconds === 0) {
     setMessage("voice-message", "Please record a message before submitting.");
     return;

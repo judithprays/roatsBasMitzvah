@@ -47,16 +47,18 @@
       <h2>Record<br><em>a little message.</em></h2>
       <p>An inside joke? A word of wisdom? A compliment? A shriek of excitement?? Record a note for Roat, and you may just hear it on the dance floor!</p>
       <div class="form-card recorder-card">
-        <label>Your name<input id="voice-name" maxlength="100" placeholder="Your name" required></label>
         <div class="recording-time" id="recording-time">00:00</div>
-        <div class="record-controls">
+        <div class="record-controls" id="record-controls">
           <button class="record-button" id="record-button" type="button"><span class="record-dot"></span><span id="record-label">START RECORDING</span></button>
-          <button class="text-button" id="stop-button" type="button" disabled>STOP</button>
+          <button class="text-button" id="stop-button" type="button" hidden>STOP</button>
         </div>
-        <audio id="preview-audio" controls hidden></audio>
-        <div class="record-actions">
-          <button class="secondary-button" id="submit-voice" type="button" disabled>SUBMIT MESSAGE ↗</button>
-          <button class="text-button" id="discard-voice" type="button" disabled>RE-RECORD</button>
+        <div class="voice-review" id="voice-review" hidden>
+          <label>Your name<input id="voice-name" maxlength="100" placeholder="Your name" autocomplete="name" required></label>
+          <audio id="preview-audio" controls></audio>
+          <div class="record-actions">
+            <button class="secondary-button" id="submit-voice" type="button" disabled>SUBMIT MESSAGE ↗</button>
+            <button class="text-button" id="discard-voice" type="button">RE-RECORD</button>
+          </div>
         </div>
         <p class="microcopy">RECORD AS LONG AS YOU LIKE · PRIVATE TO THE FAMILY</p>
         <p class="form-message" id="voice-message" role="status"></p>

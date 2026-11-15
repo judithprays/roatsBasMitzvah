@@ -13,15 +13,6 @@ function showToast(message, isError = false) {
   toastTimer = setTimeout(() => toast.classList.remove("is-visible"), 4800);
 }
 
-document.querySelectorAll(".bulbs").forEach((row) => {
-  for (let i = 0; i < 25; i++) {
-    const bulb = document.createElement("span");
-    bulb.className = "bulb";
-    bulb.style.animationDelay = `${(i % 7) * 0.17}s`;
-    row.append(bulb);
-  }
-});
-
 function checkSubmission(requestId, timeoutMs = 25000) {
   return new Promise((resolve, reject) => {
     const callbackName = "__submission_" + requestId.replace(/[^a-zA-Z0-9_]/g, "");

@@ -181,3 +181,11 @@ footer { padding: 55px 20px; background: var(--ink); color: var(--paper); text-a
   }
   .photo-section img { object-position: center 55%; }
 }
+
+
+/* Keep the "Are you coming or what?" photo centered on mobile. */
+@media (max-width: 600px) {
+  .mad-section img {
+    object-position: 50% 50%;
+  }
+}

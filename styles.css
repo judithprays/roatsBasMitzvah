@@ -258,20 +258,22 @@ footer { padding: 55px 20px; background: var(--ink); color: var(--paper); text-a
 .hero-details {
   position: relative;
   z-index: 2;
+  margin-top: -100vh;
+  margin-top: -100svh;
   min-height: 100vh;
   min-height: 100svh;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 56px 24px;
-  background: var(--paper);
+  background: transparent;
 }
 .hero-details .hero-copy {
   width: min(560px, 100%);
   max-width: 560px;
   margin: 0;
   padding: clamp(28px, 5vw, 64px);
-  background: var(--paper);
+  background: rgba(247, 238, 237, .7);
   color: var(--ink);
   text-align: center;
 }

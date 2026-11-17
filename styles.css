@@ -509,3 +509,8 @@ main { width: 100%; margin: 0; padding: 0; overflow: hidden; }
     will-change: auto;
   }
 }
+
+/* Desktop hero name scale. */
+@media (min-width: 901px) {
+  .hero-copy .hero-name { font-size: 16vw; }
+}

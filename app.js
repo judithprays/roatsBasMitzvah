@@ -262,7 +262,10 @@ updateClock();
       // Rise to the vertical center, expand to the full screen width, then hold.
       const reveal = ease(clamp(progress / 0.45, 0, 1));
       const height = 20 + (viewportH * 0.56 - 20) * reveal;
-      const top = (viewportH - height) * (1 - reveal);
+      // Start peeking up from the bottom, then stop with the portrait centered.
+      const startTop = viewportH - 20;
+      const centeredTop = (viewportH - height) / 2;
+      const top = startTop + (centeredTop - startTop) * reveal;
       frame.style.top = top + "px";
       frame.style.width = "100vw";
       frame.style.height = height + "px";

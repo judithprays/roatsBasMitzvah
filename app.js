@@ -235,38 +235,53 @@ $("submit-voice").addEventListener("click", async () => {
 updateClock();
 
 
-// Safari-compatible scroll reveal and parallax for the opening portrait.
+// Cross-browser scroll-driven portrait expansion and true image parallax.
 (() => {
   const scene = document.querySelector(".hero-image-scene");
   const frame = scene?.querySelector(".hero-image");
   const image = frame?.querySelector("img");
   if (!scene || !frame || !image) return;
-  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-  if (reduceMotion.matches) return;
 
   let raf = 0;
   const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
+
   const update = () => {
     raf = 0;
-    const rect = scene.getBoundingClientRect();
-    const travel = Math.max(1, scene.offsetHeight - window.innerHeight);
-    const progress = clamp(-rect.top / travel, 0, 1);
+    const viewportH = window.innerHeight;
+    const viewportW = window.innerWidth;
+    const sceneTop = scene.getBoundingClientRect().top + window.scrollY;
+    const travel = Math.max(1, scene.offsetHeight - viewportH);
+    const progress = clamp((window.scrollY - sceneTop) / travel, 0, 1);
     const eased = progress * progress * (3 - 2 * progress);
 
-    // The image frame settles into a true edge-to-edge viewport as the scene scrolls.
-    const width = 80 + eased * 20;
-    const height = 58 + eased * 42;
-    const radius = (1 - eased) * 4;
-    frame.style.width = width + "%";
-    frame.style.height = height + "svh";
-    frame.style.borderRadius = radius + "px";
-    frame.style.transform = `translate3d(0, ${(1 - eased) * 21}svh, 0)`;
-    image.style.transform = `translate3d(0, ${(0.5 - progress) * 54}px, 0) scale(${1.08 - eased * 0.08})`;
+    // Grow the portrait from a framed peek to a true edge-to-edge screen.
+    frame.style.width = (78 + eased * 22) + "vw";
+    frame.style.height = (25 + eased * 75) + "vh";
+    frame.style.borderRadius = ((1 - eased) * 4) + "px";
+    frame.style.transform = "translate3d(0," + ((1 - eased) * viewportH * 0.28) + "px,0)";
+
+    // Move the photograph independently from its frame: this is the parallax.
+    const drift = (0.5 - progress) * Math.min(150, viewportH * 0.18);
+    image.style.transform = "translate3d(0," + drift + "px,0) scale(" + (1.2 - eased * 0.2) + ")";
   };
+
   const requestUpdate = () => {
     if (!raf) raf = window.requestAnimationFrame(update);
   };
+
+  const sizeScene = () => {
+    scene.style.height = (window.innerHeight * 1.8) + "px";
+    requestUpdate();
+  };
+
+  frame.style.position = "sticky";
+  frame.style.top = "0";
+  frame.style.marginLeft = "auto";
+  frame.style.marginRight = "auto";
+  scene.style.overflow = "visible";
+  sizeScene();
   window.addEventListener("scroll", requestUpdate, { passive: true });
-  window.addEventListener("resize", requestUpdate);
+  window.addEventListener("resize", sizeScene);
+  window.addEventListener("orientationchange", sizeScene);
   update();
 })();

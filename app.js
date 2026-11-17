@@ -235,7 +235,7 @@ $("submit-voice").addEventListener("click", async () => {
 updateClock();
 
 
-// Scroll-driven opening: the portrait rises to center, fills the viewport, then holds.
+// Scroll-driven opening: the portrait rises first, then expands to fill the viewport.
 (() => {
   const scene = document.querySelector(".hero-image-scene");
   const frame = scene?.querySelector(".hero-image");
@@ -256,21 +256,22 @@ updateClock();
     const distanceIntoScene = viewportH - 20 - sceneTop;
     const progress = clamp(distanceIntoScene / (viewportH * 1.2), 0, 1);
 
-    // First the portrait slides up and opens to the full page width.
-    const riseProgress = ease(clamp(progress / 0.45, 0, 1));
-    const riseHeight = 20 + (viewportH * 0.56 - 20) * riseProgress;
-    const riseTop = (viewportH - riseHeight) * (1 - riseProgress / 2);
+    // Let the image travel halfway up before any enlargement begins.
+    const travelProgress = ease(clamp(progress / 0.45, 0, 1));
+    const zoomProgress = ease(clamp((travelProgress - 0.5) / 0.5, 0, 1));
+    const portraitHeight = 20 + (viewportH * 0.56 - 20) * zoomProgress;
+    const portraitTop = (viewportH - portraitHeight) * (1 - travelProgress / 2);
 
-    // Then it expands from the centered portrait to a full-viewport image.
+    // Once centered and full width, continue expanding vertically to the viewport.
     const takeoverProgress = ease(clamp((progress - 0.45) / 0.55, 0, 1));
-    const height = riseHeight + (viewportH - riseHeight) * takeoverProgress;
-    const top = riseTop * (1 - takeoverProgress);
+    const height = portraitHeight + (viewportH - portraitHeight) * takeoverProgress;
+    const top = portraitTop * (1 - takeoverProgress);
 
     frame.style.top = top + "px";
-    frame.style.width = (70 + 30 * riseProgress) + "vw";
+    frame.style.width = (70 + 30 * zoomProgress) + "vw";
     frame.style.height = height + "px";
     frame.style.borderRadius = ((1 - progress) * 3) + "px";
-    image.style.transform = "scale(" + (1.2 - progress * 0.2) + ")";
+    image.style.transform = "scale(" + (1.2 - zoomProgress * 0.2) + ")";
   }
 
   function requestUpdate() {
@@ -279,7 +280,8 @@ updateClock();
 
   function resize() {
     const viewportH = window.visualViewport?.height || window.innerHeight;
-    scene.style.height = (viewportH * 3.4) + "px";
+    // End the scene as soon as the full-screen transition completes.
+    scene.style.height = (viewportH * 2.2) + "px";
     requestUpdate();
   }
 

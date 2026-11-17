@@ -840,29 +840,29 @@ main { overflow: visible !important; }
 
 /* Final opening choreography: a 20px portrait peek, then expand on the first scroll. */
 .opening-screen {
-  height: 100vh !important;
-  height: 100svh !important;
-  min-height: 100vh !important;
-  min-height: 100svh !important;
+  height: 100vh;
+  height: 100svh;
+  min-height: 100vh;
+  min-height: 100svh;
   padding: 32px 24px 20px !important;
   display: grid;
   place-items: center;
 }
 .hero-image-scene {
-  height: 120vh !important;
-  height: 120svh !important;
-  min-height: 0 !important;
-  margin-top: -20px !important;
+  height: 120vh;
+  height: 120svh;
+  min-height: 0;
+  margin-top: -20px;
   overflow: visible !important;
   background: transparent !important;
 }
 .hero-image-scene .hero-image {
   position: sticky !important;
-  top: calc(100svh - 20px) !important;
-  width: 70vw !important;
-  height: 20px !important;
+  top: calc(100svh - 20px);
+  width: 70vw;
+  height: 20px;
   margin: 0 auto !important;
-  border-radius: 3px 3px 0 0 !important;
+  border-radius: 3px 3px 0 0;
   overflow: hidden !important;
   background: #211b1b !important;
   will-change: width, height, top, border-radius;
@@ -870,20 +870,20 @@ main { overflow: visible !important; }
 .hero-image-scene .hero-image img {
   position: absolute !important;
   inset: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
+  width: 100%;
+  height: 100%;
   object-fit: cover !important;
   object-position: center 42% !important;
   transform: scale(1.2);
   will-change: transform;
 }
 @media (max-width: 600px) {
-  .hero-image-scene .hero-image { width: 70vw !important; height: 20px !important; }
+  .hero-image-scene .hero-image { width: 70vw; height: 20px; }
 }
 
 
 /* Match the reveal's one-viewport scroll range: full-screen image, then details. */
 .hero-image-scene {
-  height: 100vh !important;
-  height: 100svh !important;
+  height: 100vh;
+  height: 100svh;
 }

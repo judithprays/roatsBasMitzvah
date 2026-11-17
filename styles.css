@@ -355,3 +355,7 @@ main { width: 100%; margin: 0; padding: 0; overflow: hidden; }
     }
   }
 }
+
+/* Explicitly disable the legacy hero pseudo-backgrounds from the original theme. */
+.hero::before, .hero::after { content: none; }
+.hero-image { z-index: 0; }

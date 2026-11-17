@@ -265,14 +265,14 @@ updateClock();
     const viewportH = window.visualViewport?.height || window.innerHeight;
     const sceneTop = scene.getBoundingClientRect().top;
     const distanceIntoScene = viewportH - 20 - sceneTop;
-    const progress = clamp(distanceIntoScene / (viewportH * 1.2), 0, 1);
+    const progress = clamp(distanceIntoScene / (viewportH * 1.2), 0, mobile.matches ? 2 : 1);
 
     if (mobile.matches) {
       // Reveal the portrait first, using the card's exact rendered height so
       // the two surfaces lock together without a size mismatch.
       const reveal = ease(clamp(progress / 0.45, 0, 1));
       const height = card.getBoundingClientRect().height || viewportH * 0.70;
-      const startTop = viewportH - 20;
+      const startTop = viewportH - 50;
       const centeredTop = (viewportH - height) / 2;
       const top = startTop + (centeredTop - startTop) * reveal;
       frame.style.top = top + "px";
@@ -284,7 +284,7 @@ updateClock();
       // Hold the portrait completely still after it locks into place.
       // Only then does the card begin its entrance, overlaying the image
       // at exactly the same width and height.
-      const cardProgress = ease(clamp((progress - 0.50) / 0.50, 0, 1));
+      const cardProgress = ease(clamp((progress - 0.50) / 1.00, 0, 1));
       const cardTop = (viewportH - height) / 2;
       const cardY = cardTop + (viewportH - cardTop) * (1 - cardProgress);
       card.style.height = height + "px";
@@ -323,7 +323,7 @@ updateClock();
     const viewportH = window.visualViewport?.height || window.innerHeight;
     // Mobile needs a short pinned hold for the card entrance. Desktop retains
     // its original long scroll-driven portrait sequence.
-    scene.style.height = (viewportH * (mobile.matches ? 2.2 : 340)) + "px";
+    scene.style.height = (viewportH * (mobile.matches ? 3.4 : 340)) + "px";
     requestUpdate();
   }
 

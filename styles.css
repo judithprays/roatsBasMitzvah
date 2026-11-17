@@ -465,7 +465,7 @@ footer { padding: 55px 20px; background: var(--ink); color: var(--paper); text-a
   .hero-details .hero-copy {
     width: 100vw;
     max-width: none;
-    height: 56svh;
+    height: 70svh;
     min-height: 0;
     margin: 0;
     padding: 18px;
@@ -481,10 +481,10 @@ footer { padding: 55px 20px; background: var(--ink); color: var(--paper); text-a
 /* Rotating prompt uses the same pink italic treatment as section headings. */
 .voice-prompt {
   min-height: 1.6em;
-  margin: 28px auto 0;
+  margin: 38px auto 0;
   color: var(--deep);
   font-family: "Playfair Display", serif;
-  font-size: clamp(20px, 4vw, 27px);
+  font-size: clamp(25px, 5vw, 34px);
   font-style: italic;
   font-weight: 600;
   letter-spacing: -.06em;

@@ -271,9 +271,12 @@ updateClock();
       frame.style.borderRadius = "0";
       image.style.transform = "scale(1.04)";
 
-      // The invitation card rises over the stationary portrait near the end.
-      const cardProgress = ease(clamp((progress - 0.45) / 0.27, 0, 1));
-      card.style.transform = "translateY(" + ((1 - cardProgress) * viewportH) + "px)";
+      // Wait until the portrait is fully centered. Then take a slower path
+      // from below the viewport to the portrait's top edge.
+      const cardProgress = ease(clamp((progress - 0.45) / 0.45, 0, 1));
+      const cardTop = (viewportH - height) / 2;
+      const cardY = cardTop + (viewportH - cardTop) * (1 - cardProgress);
+      card.style.transform = "translateY(" + cardY + "px)";
       card.style.opacity = "0.7";
       return;
     }
@@ -293,8 +296,9 @@ updateClock();
     frame.style.borderRadius = ((1 - progress) * 3) + "px";
     image.style.transform = "scale(" + (1.2 - zoomProgress * 0.2) + ")";
 
+    // Preserve the previous desktop entrance; the desktop portrait is full-screen.
     const cardProgress = ease(clamp((progress - 0.45) / 0.27, 0, 1));
-      card.style.transform = "translateY(" + ((1 - cardProgress) * viewportH) + "px)";
+    card.style.transform = "translateY(" + ((1 - cardProgress) * viewportH) + "px)";
     card.style.opacity = "0.7";
   }
 
@@ -304,9 +308,9 @@ updateClock();
 
   function resize() {
     const viewportH = window.visualViewport?.height || window.innerHeight;
-    // Keep the complete image-and-card composition pinned after the card
-    // arrives. Once this longer scene ends, the stage scrolls away as one unit.
-    scene.style.height = (viewportH * 2.2) + "px";
+    // Mobile needs a short pinned hold for the card entrance. Desktop retains
+    // its original long scroll-driven portrait sequence.
+    scene.style.height = (viewportH * (mobile.matches ? 2.2 : 340)) + "px";
     requestUpdate();
   }
 

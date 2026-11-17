@@ -247,7 +247,7 @@ updateClock();
 
   const update = () => {
     raf = 0;
-    const viewportH = window.innerHeight;
+    const viewportH = window.visualViewport ? window.visualViewport.height : window.innerHeight;
     // The reveal starts at page load and completes as the image scene scrolls past.
     const progress = clamp(window.scrollY / viewportH, 0, 1);
     const eased = progress * progress * (3 - 2 * progress);
@@ -267,7 +267,7 @@ updateClock();
     if (!raf) raf = window.requestAnimationFrame(update);
   };
   const sizeScene = () => {
-    scene.style.height = window.innerHeight + "px";
+    scene.style.height = (window.visualViewport ? window.visualViewport.height : window.innerHeight) + "px";
     requestUpdate();
   };
 
@@ -276,5 +276,6 @@ updateClock();
   window.addEventListener("scroll", requestUpdate, { passive: true });
   window.addEventListener("resize", sizeScene);
   window.addEventListener("orientationchange", sizeScene);
+  if (window.visualViewport) window.visualViewport.addEventListener("resize", sizeScene);
   update();
 })();

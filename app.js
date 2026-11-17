@@ -268,7 +268,7 @@ updateClock();
 
   function resize() {
     const viewportH = window.visualViewport?.height || window.innerHeight;
-    scene.style.height = viewportH + "px";
+    scene.style.height = (viewportH * 2 + 20) + "px";
     requestUpdate();
   }
 

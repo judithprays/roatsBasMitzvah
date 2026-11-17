@@ -238,6 +238,8 @@ footer { padding: 55px 20px; background: var(--ink); color: var(--paper); text-a
 }
 .hero-image-scene .hero-image {
   position: absolute;
+  left: 0;
+  right: 0;
   top: calc(100svh - 20px);
   width: 70vw;
   height: 20px;

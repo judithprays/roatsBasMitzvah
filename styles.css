@@ -219,8 +219,8 @@ footer { padding: 55px 20px; background: var(--ink); color: var(--paper); text-a
 .hero-image-scene {
   position: relative;
   z-index: 1;
-  height: 200vh;
-  height: 200svh;
+  height: 100vh;
+  height: 100svh;
   margin-top: -20px;
   background: #211b1b;
 }

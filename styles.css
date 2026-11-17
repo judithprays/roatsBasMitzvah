@@ -221,7 +221,7 @@ footer { padding: 55px 20px; background: var(--ink); color: var(--paper); text-a
   height: 100vh;
   height: 100svh;
   margin-top: -20px;
-  background: #211b1b;
+  background: transparent;
 }
 .hero-image-scene .hero-image {
   position: sticky;

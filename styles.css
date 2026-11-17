@@ -497,3 +497,12 @@ footer { padding: 55px 20px; background: var(--ink); color: var(--paper); text-a
 @media (prefers-reduced-motion: reduce) {
   .voice-prompt { transition: none; }
 }
+
+/* Mobile hero initial peek: 50px visible, portrait at 60vw. */
+@media (max-width: 600px) {
+  .hero-image-scene .hero-image {
+    top: calc(100svh - 50px);
+    width: 60vw;
+    height: 50px;
+  }
+}

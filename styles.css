@@ -224,13 +224,20 @@ footer { padding: 55px 20px; background: var(--ink); color: var(--paper); text-a
 .hero-image-scene {
   position: relative;
   z-index: 1;
-  height: 340vh;
-  height: 340svh;
+  height: 220vh;
+  height: 220svh;
   margin-top: -20px;
   background: transparent;
 }
-.hero-image-scene .hero-image {
+.hero-stage {
   position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100svh;
+  overflow: hidden;
+}
+.hero-image-scene .hero-image {
+  position: absolute;
   top: calc(100svh - 20px);
   width: 70vw;
   height: 20px;
@@ -266,10 +273,9 @@ footer { padding: 55px 20px; background: var(--ink); color: var(--paper); text-a
   pointer-events: none;
 }
 .hero-details {
-  position: relative;
+  position: absolute;
   z-index: 2;
-  margin-top: -100vh;
-  margin-top: -100svh;
+  inset: 0;
   min-height: 100vh;
   min-height: 100svh;
   display: flex;
@@ -350,8 +356,9 @@ footer { padding: 55px 20px; background: var(--ink); color: var(--paper); text-a
 @media (prefers-reduced-motion: reduce) {
   .opening-screen p { opacity: 1; animation: none; transform: translateY(-4vh); }
   .hero-image-scene { height: 100svh; margin-top: 0; }
+  .hero-stage { position: relative; top: auto; height: 100svh; }
   .hero-image-scene .hero-image {
-    position: relative;
+    position: absolute;
     top: auto;
     width: 100%;
     height: 100svh;

@@ -192,3 +192,100 @@ footer { padding: 55px 20px; background: var(--ink); color: var(--paper); text-a
     object-position: 50% 50%;
   }
 }
+
+
+/* Swiss editorial hero: full-bleed portrait, rose wash, quiet information panel. */
+html, body, main { width: 100%; min-width: 0; margin: 0; }
+body { overflow-x: hidden; }
+.hero {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100svh;
+  margin: 0;
+  padding: clamp(18px, 4vw, 56px);
+  overflow: hidden;
+  text-align: left;
+  background: #30252a url("roat.png") center center / cover no-repeat;
+}
+.hero::after { content: none; }
+.hero::before {
+  z-index: 0;
+  inset: 0;
+  background: rgba(206, 135, 152, .28);
+  mix-blend-mode: color;
+  pointer-events: none;
+}
+.hero-copy {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 460px);
+  padding: clamp(28px, 4vw, 52px);
+  background: #f7eeed;
+  color: #30252a;
+  text-align: left;
+}
+.hero-copy .eyebrow {
+  max-width: 290px;
+  margin: 0 0 28px;
+  color: #765e65;
+  font-size: 9px;
+  line-height: 1.8;
+  letter-spacing: .16em;
+  font-weight: 600;
+}
+.hero-copy .hero-name {
+  margin: 0 0 24px;
+  color: #30252a;
+  font-size: clamp(68px, 10vw, 112px);
+  line-height: 1;
+  letter-spacing: -.075em;
+  font-weight: 700;
+}
+.hero-copy .event-type {
+  margin: 0 0 12px;
+  font-size: 11px;
+  line-height: 1.5;
+  letter-spacing: .14em;
+  font-weight: 700;
+}
+.hero-copy .hero-date {
+  margin: 0 0 7px;
+  font-size: 12px;
+  letter-spacing: .1em;
+  font-weight: 600;
+}
+.hero-copy .hero-time {
+  margin: 0 0 25px;
+  color: #765e65;
+  font-size: 12px;
+}
+.hero-copy .primary-button {
+  border-radius: 0;
+  padding: 15px 19px;
+  background: #30252a;
+  box-shadow: none;
+}
+.hero-copy .hero-note {
+  margin: 20px 0 0;
+  color: #765e65;
+  font-size: 13px;
+}
+@media (max-width: 600px) {
+  .hero {
+    min-height: 100svh;
+    padding: 16px;
+    background-position: center center;
+  }
+  .hero-copy {
+    width: min(100%, 390px);
+    padding: 27px 25px 29px;
+  }
+  .hero-copy .eyebrow { margin-bottom: 20px; }
+  .hero-copy .hero-name { font-size: clamp(66px, 19vw, 92px); }
+  .hero-copy .hero-note { font-size: 12px; }
+}

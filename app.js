@@ -233,3 +233,29 @@ $("submit-voice").addEventListener("click", async () => {
   }
 });
 updateClock();
+
+
+// Cross-browser scroll parallax for the full-screen portrait.
+// Uses ordinary scroll + transforms (not background-attachment: fixed or experimental CSS timelines).
+(() => {
+  const scene = document.querySelector(".hero-image-scene");
+  const image = scene?.querySelector("img");
+  if (!scene || !image || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+  let scheduled = false;
+  const updateParallax = () => {
+    scheduled = false;
+    const rect = scene.getBoundingClientRect();
+    const progress = (window.innerHeight - rect.top) / (window.innerHeight + rect.height);
+    const offset = (Math.max(0, Math.min(1, progress)) - 0.5) * 110;
+    image.style.transform = `translate3d(0, ${offset}px, 0) scale(1.08)`;
+  };
+  const requestUpdate = () => {
+    if (scheduled) return;
+    scheduled = true;
+    window.requestAnimationFrame(updateParallax);
+  };
+  window.addEventListener("scroll", requestUpdate, { passive: true });
+  window.addEventListener("resize", requestUpdate);
+  updateParallax();
+})();

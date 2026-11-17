@@ -5,12 +5,8 @@
 }
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
-body { margin: 0; background: var(--paper); }
-main { overflow: hidden; }
-.hero { position: relative; isolation: isolate; min-height: 100vh; min-height: 100svh; padding: 34px 20px 76px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; background: #211b1b; }
-.hero::before { content: ""; position: absolute; z-index: -1; inset: 0; background: linear-gradient(180deg, #fffaf54d 0%, #fffaf533 55%, #fffaf566 100%); pointer-events: none; }
-.hero::after { content: ""; position: absolute; z-index: -2; inset: 0; background: url("roat.png") center center / cover no-repeat; }
-.hero > * { position: relative; }
+body { margin: 0; background: var(--paper); overflow-x: clip; }
+main { overflow: visible; }
 .eyebrow { font-size: 10px; letter-spacing: .22em; font-weight: 800; color: var(--deep); margin: 0 0 22px; }
 .hero-name { color: #000; font-family: "DM Sans", sans-serif; font-size: clamp(104px, 22vw, 250px); font-weight: 900; line-height: .95; letter-spacing: -.08em; margin: 8px 0 26px; }
 .event-type { font-size: clamp(22px, 5vw, 38px); letter-spacing: .13em; margin: 32px 0 18px; font-weight: 800; }
@@ -42,7 +38,11 @@ label { display: block; font-size: 11px; font-weight: 800; letter-spacing: .04em
 .recorder-card { text-align: center; }.recorder-card label { text-align: left; }.recording-time { font-size: 38px; font-weight: 800; letter-spacing: -.06em; margin: 22px 0; }.recording-time span { font-size: 13px; color: var(--muted); letter-spacing: 0; }.record-controls, .record-actions { display: flex; justify-content: center; align-items: center; gap: 14px; }.record-button { border: 0; border-radius: 100px; background: var(--ink); color: white; padding: 14px 20px; font: 800 10px "DM Sans"; letter-spacing: .1em; display: flex; align-items: center; gap: 10px; cursor: pointer; }.record-dot { width: 9px; height: 9px; border-radius: 50%; background: #ed8b9e; }.record-button.is-recording .record-dot { animation: pulse 1s infinite; }.text-button { border: 0; background: none; color: var(--deep); font: 800 10px "DM Sans"; letter-spacing: .12em; cursor: pointer; padding: 12px; }.text-button:disabled, button:disabled { opacity: .35; cursor: not-allowed; }.record-actions { margin-top: 18px; flex-wrap: wrap; }.record-actions .secondary-button { width: auto; }.microcopy { color: var(--muted); font-size: 9px; letter-spacing: .14em; margin: 20px 0 0; } audio { width: 100%; margin-top: 20px; }.still-invited { max-width: 420px; margin: 24px auto 0; color: var(--muted); font: italic 14px "Playfair Display", serif; }
 footer { padding: 55px 20px; background: var(--ink); color: var(--paper); text-align: center; } .footer-mark { font-size: 38px; font-weight: 900; letter-spacing: -.08em; } footer p, footer a { color: #e7cbd0; font-size: 9px; letter-spacing: .16em; text-decoration: none; } footer a { display: inline-block; margin-top: 22px; }
 @keyframes pulse { 50% { box-shadow: 0 0 0 7px #ed8b9e33; } }
-@media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; } }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: .01ms; animation-iteration-count: 1; transition-duration: .01ms; }
+  .record-button.is-recording .record-dot { animation: none; }
+}
 @media (max-width: 700px) { .food-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 520px; } }
 @media (max-width: 520px) { .section { padding: 76px 18px; }.food-grid { gap: 7px; }.food-grid article { padding: 20px 4px; }.food-grid h3 { font-size: 8px; }.form-card { padding: 21px 17px; } }
 
@@ -197,7 +197,6 @@ footer { padding: 55px 20px; background: var(--ink); color: var(--paper); text-a
 /* Opening sequence: one source of truth for the intro, portrait reveal, and invitation. */
 .opening-screen {
   position: relative;
-  z-index: 2;
   height: 100vh;
   height: 100svh;
   min-height: 0;
@@ -331,13 +330,13 @@ footer { padding: 55px 20px; background: var(--ink); color: var(--paper); text-a
   }
 }
 @media (prefers-reduced-motion: reduce) {
+  .hero-image-scene { margin-top: 0; }
   .hero-image-scene .hero-image {
+    position: relative;
+    top: auto;
     width: 100%;
     height: 100svh;
-    top: 0;
     border-radius: 0;
   }
-  .hero-image-scene .hero-image img {
-    transform: none;
-  }
+  .hero-image-scene .hero-image img { transform: none; }
 }

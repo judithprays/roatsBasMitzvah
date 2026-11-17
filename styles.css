@@ -535,3 +535,32 @@ main { width: 100%; margin: 0; padding: 0; overflow: hidden; }
     object-fit: cover;
   }
 }
+
+/* Final invitation-card sizing and event detail alignment. */
+.hero-copy .event-type .hebrew-date {
+  display: inline;
+  white-space: nowrap;
+  font: inherit;
+  letter-spacing: inherit;
+}
+.hero-copy .hero-note {
+  font-family: "DM Sans", sans-serif;
+  font-style: normal;
+  color: var(--ink);
+  font-size: 12px;
+  letter-spacing: .08em;
+  margin: 10px 0 24px;
+}
+.hero-copy .primary-button {
+  margin-top: 0;
+}
+@media (min-width: 1301px) {
+  .hero-copy {
+    flex-basis: 560px;
+    width: 560px;
+    max-width: 560px;
+  }
+  .hero-copy .hero-name {
+    font-size: 208px;
+  }
+}

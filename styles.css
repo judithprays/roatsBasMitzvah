@@ -252,8 +252,18 @@ footer { padding: 55px 20px; background: var(--ink); color: var(--paper); text-a
   transform: scale(1.2);
   will-change: transform;
 }
+.hero-image-scene .hero-image img {
+  filter: grayscale(1);
+}
 .hero-image-scene .hero-image::after {
-  content: none;
+  content: "";
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  background: #ce8798;
+  opacity: .34;
+  mix-blend-mode: color;
+  pointer-events: none;
 }
 .hero-details {
   position: relative;

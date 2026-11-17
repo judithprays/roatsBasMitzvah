@@ -478,14 +478,16 @@ footer { padding: 55px 20px; background: var(--ink); color: var(--paper); text-a
 }
 
 
-/* Rotating voice-note prompt beneath the recorder. */
+/* Rotating prompt uses the same pink italic treatment as section headings. */
 .voice-prompt {
   min-height: 1.6em;
   margin: 28px auto 0;
-  color: var(--ink);
+  color: var(--deep);
   font-family: "Playfair Display", serif;
   font-size: clamp(20px, 4vw, 27px);
   font-style: italic;
+  font-weight: 600;
+  letter-spacing: -.06em;
   line-height: 1.4;
   text-align: center;
   opacity: 1;

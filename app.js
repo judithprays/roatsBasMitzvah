@@ -266,7 +266,7 @@ updateClock();
       const centeredTop = (viewportH - height) / 2;
       const top = startTop + (centeredTop - startTop) * reveal;
       frame.style.top = top + "px";
-      frame.style.width = "100vw";
+      frame.style.width = (60 + 40 * reveal) + "vw";
       frame.style.height = height + "px";
       frame.style.borderRadius = "0";
       image.style.transform = "scale(1.04)";

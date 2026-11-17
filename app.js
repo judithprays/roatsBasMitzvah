@@ -84,7 +84,8 @@ $("rsvp-form").addEventListener("submit", async (event) => {
     name: form.get("name").trim(),
     email: form.get("email").trim(),
     attending: form.get("attending"),
-    guest_count: Number(form.get("guest_count"))
+    guest_count: Number(form.get("guest_count")),
+    song: form.get("song").trim()
   };
   const button = event.currentTarget.querySelector('button[type="submit"]');
   button.disabled = true;
@@ -93,19 +94,6 @@ $("rsvp-form").addEventListener("submit", async (event) => {
     await submitToGoogle("rsvp", payload, "rsvp-message");
     event.currentTarget.reset();
   } catch (error) { setMessage("rsvp-message", error.message); }
-  finally { button.disabled = false; }
-});
-
-$("song-form").addEventListener("submit", async (event) => {
-  event.preventDefault();
-  const form = new FormData(event.currentTarget);
-  const payload = { name: form.get("name").trim(), song: form.get("song").trim() };
-  const button = event.currentTarget.querySelector('button[type="submit"]');
-  button.disabled = true;
-  try {
-    await submitToGoogle("song", payload, "song-message");
-    event.currentTarget.reset();
-  } catch (error) { setMessage("song-message", error.message); }
   finally { button.disabled = false; }
 });
 
@@ -239,11 +227,11 @@ updateClock();
   const prompt = document.getElementById("voice-prompt");
   if (!prompt) return;
   const ideas = [
-    "Mazal tov, Roat!",
-    "Roat, I love you!",
-    "Roat is literally the coolest person I know.",
-    "Remember that time we...",
-    "ROAT!!!"
+    '"Mazal tov, Roat!"',
+    '"Roat, I love you!"',
+    '"Roat is literally the coolest person I know."',
+    '"Remember that time we..."',
+    '"ROAT!!!"'
   ];
   let index = 0;
   window.setInterval(() => {
@@ -283,7 +271,7 @@ updateClock();
       // Reveal the portrait first, using the card's exact rendered height so
       // the two surfaces lock together without a size mismatch.
       const reveal = ease(clamp(progress / 0.45, 0, 1));
-      const height = card.getBoundingClientRect().height || viewportH * 0.56;
+      const height = card.getBoundingClientRect().height || viewportH * 0.70;
       const startTop = viewportH - 20;
       const centeredTop = (viewportH - height) / 2;
       const top = startTop + (centeredTop - startTop) * reveal;
@@ -309,7 +297,7 @@ updateClock();
     // Desktop: portrait rises, opens to full width, then takes over the viewport.
     const travelProgress = ease(clamp(progress / 0.45, 0, 1));
     const zoomProgress = ease(clamp((travelProgress - 0.5) / 0.5, 0, 1));
-    const portraitHeight = 20 + (viewportH * 0.56 - 20) * zoomProgress;
+    const portraitHeight = 20 + (viewportH * 0.70 - 20) * zoomProgress;
     const portraitTop = (viewportH - portraitHeight) * (1 - travelProgress / 2);
     const takeoverProgress = ease(clamp((progress - 0.45) / 0.55, 0, 1));
     const height = portraitHeight + (viewportH - portraitHeight) * takeoverProgress;

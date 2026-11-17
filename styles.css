@@ -398,3 +398,7 @@ footer { padding: 55px 20px; background: var(--ink); color: var(--paper); text-a
     background: rgba(247, 238, 237, .78);
   }
 }
+
+
+/* Temporarily hide the party-details / heat section. */
+.heat-section { display: none; }

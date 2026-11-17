@@ -478,15 +478,20 @@ footer { padding: 55px 20px; background: var(--ink); color: var(--paper); text-a
 }
 
 
-/* Voice-note prompts sit beneath the recorder and inherit the original section style. */
-.voice-ideas {
-  max-width: 480px;
-  margin: 30px auto 0;
-  color: var(--muted);
-  text-align: left;
-  font-size: 14px;
-  line-height: 1.8;
+/* Rotating voice-note prompt beneath the recorder. */
+.voice-prompt {
+  min-height: 1.6em;
+  margin: 28px auto 0;
+  color: var(--ink);
+  font-family: "Playfair Display", serif;
+  font-size: clamp(20px, 4vw, 27px);
+  font-style: italic;
+  line-height: 1.4;
+  text-align: center;
+  opacity: 1;
+  transition: opacity .45s ease;
 }
-.voice-ideas p { margin: 0 0 10px; }
-.voice-ideas ul { margin: 0; padding-left: 22px; }
-.voice-ideas li { padding: 2px 0; }
+.voice-prompt.is-fading { opacity: 0; }
+@media (prefers-reduced-motion: reduce) {
+  .voice-prompt { transition: none; }
+}

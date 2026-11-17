@@ -304,9 +304,9 @@ updateClock();
 
   function resize() {
     const viewportH = window.visualViewport?.height || window.innerHeight;
-    // End the scroll scene as the card finishes entering, so image and card
-    // leave the opening together on the next scroll.
-    scene.style.height = (viewportH * 1.2) + "px";
+    // Keep the complete image-and-card composition pinned after the card
+    // arrives. Once this longer scene ends, the stage scrolls away as one unit.
+    scene.style.height = (viewportH * 2.2) + "px";
     requestUpdate();
   }
 

@@ -273,7 +273,7 @@ updateClock();
 
       // Wait until the portrait is fully centered. Then take a slower path
       // from below the viewport to the portrait's top edge.
-      const cardProgress = ease(clamp((progress - 0.45) / 0.45, 0, 1));
+      const cardProgress = ease(clamp((progress - 0.45) / 0.55, 0, 1));
       const cardTop = (viewportH - height) / 2;
       const cardY = cardTop + (viewportH - cardTop) * (1 - cardProgress);
       card.style.transform = "translateY(" + cardY + "px)";

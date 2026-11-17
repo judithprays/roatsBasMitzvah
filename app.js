@@ -234,6 +234,28 @@ $("submit-voice").addEventListener("click", async () => {
 updateClock();
 
 
+// Rotate gentle voice-note ideas beneath the recorder.
+(() => {
+  const prompt = document.getElementById("voice-prompt");
+  if (!prompt) return;
+  const ideas = [
+    "Mazal tov, Roat!",
+    "Roat, I love you!",
+    "Roat is literally the coolest person I know.",
+    "Remember that time we...",
+    "ROAT!!!"
+  ];
+  let index = 0;
+  window.setInterval(() => {
+    prompt.classList.add("is-fading");
+    window.setTimeout(() => {
+      index = (index + 1) % ideas.length;
+      prompt.textContent = ideas[index];
+      prompt.classList.remove("is-fading");
+    }, 450);
+  }, 3000);
+})();
+
 // Scroll-driven opening: portrait reveal with responsive invitation-card entrance.
 (() => {
   const scene = document.querySelector(".hero-image-scene");

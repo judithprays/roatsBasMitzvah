@@ -788,3 +788,6 @@ main { width: 100%; margin: 0; padding: 0; overflow: hidden; }
   .hero-image-scene { height: 180vh !important; }
   .hero-image-scene .hero-image { width: 82vw; height: 23vh; }
 }
+
+/* Sticky needs an unclipped ancestor; horizontal overflow is already hidden on body. */
+main { overflow: visible !important; }

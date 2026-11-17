@@ -880,3 +880,10 @@ main { overflow: visible !important; }
 @media (max-width: 600px) {
   .hero-image-scene .hero-image { width: 70vw !important; height: 20px !important; }
 }
+
+
+/* Match the reveal's one-viewport scroll range: full-screen image, then details. */
+.hero-image-scene {
+  height: 100vh !important;
+  height: 100svh !important;
+}

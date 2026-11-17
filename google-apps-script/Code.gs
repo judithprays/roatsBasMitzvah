@@ -19,14 +19,24 @@ function setup() {
   }
 
   const definitions = {
-    RSVPs: ["Timestamp", "Name", "Email", "Phone", "Attending", "Guest Count"],
+    RSVPs: ["Timestamp", "Name", "Email", "Phone", "Attending", "Guest Count", "Dance Floor Song"],
     Songs: ["Timestamp", "Name", "Song"],
     VoiceMessages: ["Timestamp", "Name", "Drive File ID", "File Name", "Duration Seconds", "Content Type"]
   };
   Object.entries(definitions).forEach(([name, headers]) => {
     let sheet = spreadsheet.getSheetByName(name);
     if (!sheet) sheet = spreadsheet.insertSheet(name);
-    if (sheet.getLastRow() === 0) sheet.appendRow(headers);
+    if (sheet.getLastRow() === 0) {
+      sheet.appendRow(headers);
+    } else {
+      const existingHeaders = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
+      headers.forEach(header => {
+        if (!existingHeaders.includes(header)) {
+          sheet.getRange(1, sheet.getLastColumn() + 1).setValue(header);
+          existingHeaders.push(header);
+        }
+      });
+    }
     sheet.setFrozenRows(1);
   });
 
@@ -55,10 +65,11 @@ function doPost(e) {
       const phone = clean_(p.phone, 40);
       const attending = p.attending === "yes" ? "Yes" : "No";
       const guests = Math.max(1, Math.min(20, Number(p.guest_count) || 1));
+      const song = clean_(p.song, 500);
       if (!name || !email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
         throw new Error("Please provide a name and valid email address.");
       }
-      ss.getSheetByName("RSVPs").appendRow([now, name, email, phone, attending, guests]);
+      ss.getSheetByName("RSVPs").appendRow([now, name, email, phone, attending, guests, song]);
       return reply_(true, "Your RSVP is in. Thank you!", requestId);
     }
 

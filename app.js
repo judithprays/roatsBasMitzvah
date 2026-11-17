@@ -258,7 +258,7 @@ updateClock();
     frame.style.width = (78 + eased * 22) + "vw";
     frame.style.height = (25 + eased * 75) + "vh";
     frame.style.borderRadius = ((1 - eased) * 4) + "px";
-    frame.style.transform = "translate3d(0," + ((1 - eased) * viewportH * 0.28) + "px,0)";
+    frame.style.transform = "translate3d(0,0,0)";
 
     // Move the photograph independently from its frame: this is the parallax.
     const drift = (0.5 - progress) * Math.min(150, viewportH * 0.18);

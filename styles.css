@@ -347,3 +347,18 @@ footer { padding: 55px 20px; background: var(--ink); color: var(--paper); text-a
   }
   .hero-image-scene .hero-image img { transform: none; }
 }
+
+
+/* Mobile: let the invitation card rise over the full-screen portrait. */
+@media (max-width: 600px) {
+  .hero-details {
+    min-height: 100svh;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 44px 18px;
+    background: transparent;
+  }
+  .hero-details .hero-copy {
+    background: rgba(247, 238, 237, .7);
+  }
+}

@@ -235,7 +235,7 @@ $("submit-voice").addEventListener("click", async () => {
 updateClock();
 
 
-// Scroll-driven opening: the portrait peeks 20px at the bottom, then expands immediately.
+// Scroll-driven opening: animate over exactly one viewport of scroll.
 (() => {
   const scene = document.querySelector(".hero-image-scene");
   const frame = scene?.querySelector(".hero-image");
@@ -248,11 +248,8 @@ updateClock();
   const update = () => {
     raf = 0;
     const viewportH = window.innerHeight;
-    const sceneTop = scene.getBoundingClientRect().top + window.scrollY;
-    const travel = Math.max(1, scene.offsetHeight - viewportH);
-    // Start at page load: the 20px strip is already visible at the bottom edge.
-    const endScroll = sceneTop + travel;
-    const progress = clamp(window.scrollY / endScroll, 0, 1);
+    // The reveal starts at page load and completes as the image scene scrolls past.
+    const progress = clamp(window.scrollY / viewportH, 0, 1);
     const eased = progress * progress * (3 - 2 * progress);
     const frameHeight = 20 + eased * (viewportH - 20);
 
@@ -261,6 +258,8 @@ updateClock();
     frame.style.width = (70 + eased * 30) + "vw";
     frame.style.height = frameHeight + "px";
     frame.style.borderRadius = ((1 - eased) * 3) + "px";
+
+    // Subtle image movement inside the expanding frame adds the parallax depth.
     const drift = (0.5 - progress) * Math.min(100, viewportH * 0.12);
     image.style.transform = "translate3d(0," + drift + "px,0) scale(" + (1.2 - eased * 0.2) + ")";
   };
@@ -269,7 +268,7 @@ updateClock();
     if (!raf) raf = window.requestAnimationFrame(update);
   };
   const sizeScene = () => {
-    scene.style.height = (window.innerHeight * 1.2) + "px";
+    scene.style.height = window.innerHeight + "px";
     requestUpdate();
   };
 

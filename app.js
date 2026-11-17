@@ -272,8 +272,8 @@ updateClock();
       image.style.transform = "scale(1.04)";
 
       // The invitation card rises over the stationary portrait near the end.
-      const cardProgress = ease(clamp((progress - 0.72) / 0.28, 0, 1));
-      card.style.transform = "translateY(" + ((1 - cardProgress) * 72) + "px)";
+      const cardProgress = ease(clamp((progress - 0.45) / 0.27, 0, 1));
+      card.style.transform = "translateY(" + ((1 - cardProgress) * viewportH) + "px)";
       card.style.opacity = "0.7";
       return;
     }
@@ -293,8 +293,8 @@ updateClock();
     frame.style.borderRadius = ((1 - progress) * 3) + "px";
     image.style.transform = "scale(" + (1.2 - zoomProgress * 0.2) + ")";
 
-    const cardProgress = ease(clamp((progress - 0.72) / 0.28, 0, 1));
-    card.style.transform = "translateY(" + ((1 - cardProgress) * 72) + "px)";
+    const cardProgress = ease(clamp((progress - 0.45) / 0.27, 0, 1));
+      card.style.transform = "translateY(" + ((1 - cardProgress) * viewportH) + "px)";
     card.style.opacity = "0.7";
   }
 

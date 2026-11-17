@@ -76,18 +76,6 @@
       <p class="voice-prompt" id="voice-prompt" aria-live="polite">Mazal tov, Roat!</p>
     </section>
 
-    <section class="participate section">
-      <p class="eyebrow">HELP GET THE DANCE PARTY STARTED</p>
-      <h2>The soundtrack<br><em>needs you.</em></h2>
-      <p>Send Roat a song you love, it might end up on the party playlist.</p>
-      <form id="song-form" class="form-card">
-        <label>Your name<input name="name" autocomplete="name" required maxlength="100" placeholder="Your name"></label>
-        <label>Song + artist, or a link<input name="song" required maxlength="500" placeholder="Song title, artist, Spotify or YouTube link"></label>
-        <button class="secondary-button" type="submit">SEND A SONG <span>♫</span></button>
-        <p class="form-message" id="song-message" role="status"></p>
-      </form>
-    </section>
-
     <section class="mad-section" aria-label="Are you coming or what?">
       <img src="mad.JPG" alt="A playful invitation to Roat's Bas Mitzvah" loading="lazy">
       <h2 class="photo-heading">Are you coming<br><em>or what?</em></h2>
@@ -108,10 +96,13 @@
         <label>Number of guests, including you
           <input name="guest_count" type="number" min="1" max="20" value="1" required>
         </label>
+        <label>A song that gets you on the dance floor
+          <input name="song" maxlength="500" placeholder="Song + artist, or a link">
+        </label>
         <button class="primary-button form-submit" type="submit">SEND RSVP <span>↗</span></button>
         <p class="form-message" id="rsvp-message" role="status"></p>
       </form>
-      <p class="still-invited">Can't come? You can still send a song or leave Roat a voice message.</p>
+      <p class="still-invited">Can't come? You can still leave Roat a voice message.</p>
     </section>
 
     <section class="photo-section" aria-label="A photo of Roat">

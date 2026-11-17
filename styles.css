@@ -514,3 +514,24 @@ main { width: 100%; margin: 0; padding: 0; overflow: hidden; }
 @media (min-width: 901px) {
   .hero-copy .hero-name { font-size: 16vw; }
 }
+
+/* Full-bleed hero image: break out of any constrained parent and remove the rose frame. */
+.hero-image {
+  background: transparent !important;
+}
+@media (max-width: 900px) {
+  .hero-image {
+    width: 100vw !important;
+    max-width: none !important;
+    margin-left: calc(50% - 50vw) !important;
+    background: transparent !important;
+  }
+  .hero-image img {
+    display: block !important;
+    width: 100% !important;
+    max-width: none !important;
+    height: auto !important;
+    margin: 0 !important;
+    object-fit: cover;
+  }
+}

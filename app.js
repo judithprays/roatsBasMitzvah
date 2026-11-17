@@ -235,27 +235,37 @@ $("submit-voice").addEventListener("click", async () => {
 updateClock();
 
 
-// Cross-browser scroll parallax for the full-screen portrait.
-// Uses ordinary scroll + transforms (not background-attachment: fixed or experimental CSS timelines).
+// Safari-compatible scroll reveal and parallax for the opening portrait.
 (() => {
   const scene = document.querySelector(".hero-image-scene");
-  const image = scene?.querySelector("img");
-  if (!scene || !image || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const frame = scene?.querySelector(".hero-image");
+  const image = frame?.querySelector("img");
+  if (!scene || !frame || !image) return;
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  if (reduceMotion.matches) return;
 
-  let scheduled = false;
-  const updateParallax = () => {
-    scheduled = false;
+  let raf = 0;
+  const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
+  const update = () => {
+    raf = 0;
     const rect = scene.getBoundingClientRect();
-    const progress = (window.innerHeight - rect.top) / (window.innerHeight + rect.height);
-    const offset = (Math.max(0, Math.min(1, progress)) - 0.5) * 110;
-    image.style.transform = `translate3d(0, ${offset}px, 0) scale(1.08)`;
+    const travel = Math.max(1, scene.offsetHeight - window.innerHeight);
+    const progress = clamp(-rect.top / travel, 0, 1);
+    const eased = progress * progress * (3 - 2 * progress);
+
+    // The image frame settles into a true edge-to-edge viewport as the scene scrolls.
+    const width = 80 + eased * 20;
+    const height = 58 + eased * 42;
+    const radius = (1 - eased) * 4;
+    frame.style.width = width + "%";
+    frame.style.height = height + "svh";
+    frame.style.borderRadius = radius + "px";
+    image.style.transform = `translate3d(0, ${(0.5 - progress) * 54}px, 0) scale(${1.08 - eased * 0.08})`;
   };
   const requestUpdate = () => {
-    if (scheduled) return;
-    scheduled = true;
-    window.requestAnimationFrame(updateParallax);
+    if (!raf) raf = window.requestAnimationFrame(update);
   };
   window.addEventListener("scroll", requestUpdate, { passive: true });
   window.addEventListener("resize", requestUpdate);
-  updateParallax();
+  update();
 })();

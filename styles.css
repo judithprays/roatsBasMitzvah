@@ -411,3 +411,61 @@ footer { padding: 55px 20px; background: var(--ink); color: var(--paper); text-a
 
 /* Temporarily hide the party-details / heat section. */
 .heat-section { display: none; }
+
+
+/* Desktop keeps the original full-screen portrait sequence. */
+@media (min-width: 601px) {
+  .hero-image-scene {
+    height: 340vh;
+    height: 340svh;
+  }
+  .hero-stage {
+    display: contents;
+  }
+  .hero-image-scene .hero-image {
+    position: sticky;
+    top: calc(100svh - 20px);
+    left: auto;
+    right: auto;
+  }
+  .hero-details {
+    position: relative;
+    inset: auto;
+    margin-top: -100svh;
+    min-height: 100svh;
+  }
+}
+
+/* Mobile: the card starts only after the portrait is centered, and lands
+   exactly at the portrait's top edge instead of floating above it. */
+@media (max-width: 600px) {
+  .hero-image-scene {
+    height: 220svh;
+  }
+  .hero-stage {
+    position: sticky;
+    top: 0;
+    height: 100svh;
+    overflow: hidden;
+  }
+  .hero-image-scene .hero-image {
+    position: absolute;
+    left: 0;
+    right: 0;
+  }
+  .hero-details {
+    position: absolute;
+    inset: 0;
+    min-height: 100svh;
+    margin: 0;
+    padding: 0;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  .hero-details .hero-copy {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding: 24px 18px;
+  }
+}

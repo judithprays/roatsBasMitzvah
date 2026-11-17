@@ -364,3 +364,27 @@ footer { padding: 55px 20px; background: var(--ink); color: var(--paper); text-a
     background: rgba(247, 238, 237, .7);
   }
 }
+
+
+/* Responsive opening composition: the invitation card enters over the portrait. */
+.hero-details {
+  justify-content: flex-end;
+  padding: 56px 30px 56px 24px;
+}
+.hero-details .hero-copy {
+  opacity: 0;
+  transform: translateY(72px);
+  will-change: transform, opacity;
+}
+@media (max-width: 600px) {
+  .hero-details {
+    justify-content: center;
+    padding: 32px 0;
+  }
+  .hero-details .hero-copy {
+    width: 100%;
+    max-width: none;
+    padding: 24px 18px;
+    background: rgba(247, 238, 237, .78);
+  }
+}

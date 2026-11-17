@@ -235,47 +235,47 @@ $("submit-voice").addEventListener("click", async () => {
 updateClock();
 
 
-// Scroll-driven opening: animate over exactly one viewport of scroll.
+// Scroll-driven opening: the portrait grows from a 20px peek to one full viewport.
 (() => {
   const scene = document.querySelector(".hero-image-scene");
   const frame = scene?.querySelector(".hero-image");
   const image = frame?.querySelector("img");
   if (!scene || !frame || !image) return;
 
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  if (reduceMotion.matches) return;
+
   let raf = 0;
   const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
 
-  const update = () => {
+  function update() {
     raf = 0;
-    const viewportH = window.visualViewport ? window.visualViewport.height : window.innerHeight;
-    // The reveal starts at page load and completes as the image scene scrolls past.
+    const viewportH = window.visualViewport?.height || window.innerHeight;
     const progress = clamp(window.scrollY / viewportH, 0, 1);
     const eased = progress * progress * (3 - 2 * progress);
-    const frameHeight = 20 + eased * (viewportH - 20);
+    const height = 20 + eased * (viewportH - 20);
 
-    frame.style.position = "sticky";
-    frame.style.top = (viewportH - frameHeight) + "px";
+    frame.style.top = (viewportH - height) + "px";
     frame.style.width = (70 + eased * 30) + "vw";
-    frame.style.height = frameHeight + "px";
+    frame.style.height = height + "px";
     frame.style.borderRadius = ((1 - eased) * 3) + "px";
-
-    // Keep the top of the portrait visible in the initial peek; scale adds depth as it opens.
     image.style.transform = "scale(" + (1.2 - eased * 0.2) + ")";
-  };
+  }
 
-  const requestUpdate = () => {
+  function requestUpdate() {
     if (!raf) raf = window.requestAnimationFrame(update);
-  };
-  const sizeScene = () => {
-    scene.style.height = (window.visualViewport ? window.visualViewport.height : window.innerHeight) + "px";
-    requestUpdate();
-  };
+  }
 
-  scene.style.overflow = "visible";
-  sizeScene();
+  function resize() {
+    const viewportH = window.visualViewport?.height || window.innerHeight;
+    scene.style.height = viewportH + "px";
+    requestUpdate();
+  }
+
+  resize();
   window.addEventListener("scroll", requestUpdate, { passive: true });
-  window.addEventListener("resize", sizeScene);
-  window.addEventListener("orientationchange", sizeScene);
-  if (window.visualViewport) window.visualViewport.addEventListener("resize", sizeScene);
+  window.addEventListener("resize", resize);
+  window.addEventListener("orientationchange", resize);
+  window.visualViewport?.addEventListener("resize", resize);
   update();
 })();

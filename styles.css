@@ -804,3 +804,35 @@ main { overflow: visible !important; }
 .opening-screen p { transform: none !important; }
 .hero-peek { display: none !important; }
 .hero-image-scene { margin-top: 0 !important; }
+
+
+/* Tighten the opening sequence: less dead space, earlier portrait reveal. */
+.opening-screen {
+  min-height: 38vh !important;
+  min-height: 38svh !important;
+  height: 38vh !important;
+  height: 38svh !important;
+  padding: 20px 24px 0 !important;
+}
+.hero-image-scene {
+  height: 145vh !important;
+  height: 145svh !important;
+}
+.hero-image-scene .hero-image {
+  width: 84vw;
+  height: 30vh;
+  height: 30svh;
+}
+@media (max-width: 600px) {
+  .opening-screen {
+    min-height: 38svh !important;
+    height: 38svh !important;
+  }
+  .hero-image-scene {
+    height: 145svh !important;
+  }
+  .hero-image-scene .hero-image {
+    width: 86vw;
+    height: 30svh;
+  }
+}

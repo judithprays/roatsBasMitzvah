@@ -235,12 +235,13 @@ $("submit-voice").addEventListener("click", async () => {
 updateClock();
 
 
-// Scroll-driven opening: the portrait rises, then fills the viewport.
+// Scroll-driven opening: portrait reveal with responsive invitation-card entrance.
 (() => {
   const scene = document.querySelector(".hero-image-scene");
   const frame = scene?.querySelector(".hero-image");
   const image = frame?.querySelector("img");
-  if (!scene || !frame || !image) return;
+  const card = document.querySelector(".hero-details .hero-copy");
+  if (!scene || !frame || !image || !card) return;
 
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
   if (reduceMotion.matches) return;
@@ -258,24 +259,24 @@ updateClock();
     const progress = clamp(distanceIntoScene / (viewportH * 1.2), 0, 1);
 
     if (mobile.matches) {
-      // On phones, open to full width early and hold the shorter portrait
-      // until roughly 70% through the sequence before growing to full height.
-      const riseProgress = ease(clamp(progress / 0.42, 0, 1));
-      const widthProgress = ease(clamp(progress / 0.34, 0, 1));
-      const heightProgress = ease(clamp((progress - 0.70) / 0.30, 0, 1));
-      const portraitHeight = 20 + (viewportH * 0.56 - 20) * riseProgress;
-      const height = portraitHeight + (viewportH - portraitHeight) * heightProgress;
-      const top = ((viewportH - height) / 2) * (1 - heightProgress);
-
+      // Rise to the vertical center, expand to the full screen width, then hold.
+      const reveal = ease(clamp(progress / 0.45, 0, 1));
+      const height = 20 + (viewportH * 0.56 - 20) * reveal;
+      const top = (viewportH - height) * (1 - reveal);
       frame.style.top = top + "px";
-      frame.style.width = (70 + 30 * widthProgress) + "vw";
+      frame.style.width = "100vw";
       frame.style.height = height + "px";
-      frame.style.borderRadius = ((1 - progress) * 3) + "px";
-      image.style.transform = "scale(" + (1.05 - heightProgress * 0.05) + ")";
+      frame.style.borderRadius = "0";
+      image.style.transform = "scale(1.04)";
+
+      // The invitation card rises over the stationary portrait near the end.
+      const cardProgress = ease(clamp((progress - 0.72) / 0.28, 0, 1));
+      card.style.transform = "translateY(" + ((1 - cardProgress) * 72) + "px)";
+      card.style.opacity = String(cardProgress);
       return;
     }
 
-    // Desktop timing and composition remain unchanged.
+    // Desktop: portrait rises, opens to full width, then takes over the viewport.
     const travelProgress = ease(clamp(progress / 0.45, 0, 1));
     const zoomProgress = ease(clamp((travelProgress - 0.5) / 0.5, 0, 1));
     const portraitHeight = 20 + (viewportH * 0.56 - 20) * zoomProgress;
@@ -289,6 +290,10 @@ updateClock();
     frame.style.height = height + "px";
     frame.style.borderRadius = ((1 - progress) * 3) + "px";
     image.style.transform = "scale(" + (1.2 - zoomProgress * 0.2) + ")";
+
+    const cardProgress = ease(clamp((progress - 0.72) / 0.28, 0, 1));
+    card.style.transform = "translateY(" + ((1 - cardProgress) * 72) + "px)";
+    card.style.opacity = String(cardProgress);
   }
 
   function requestUpdate() {

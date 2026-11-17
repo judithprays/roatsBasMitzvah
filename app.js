@@ -235,7 +235,7 @@ $("submit-voice").addEventListener("click", async () => {
 updateClock();
 
 
-// Scroll-driven opening: the portrait rises first, then expands to fill the viewport.
+// Scroll-driven opening: the portrait rises, then fills the viewport.
 (() => {
   const scene = document.querySelector(".hero-image-scene");
   const frame = scene?.querySelector(".hero-image");
@@ -245,6 +245,7 @@ updateClock();
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
   if (reduceMotion.matches) return;
 
+  const mobile = window.matchMedia("(max-width: 600px)");
   let raf = 0;
   const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
   const ease = value => value * value * (3 - 2 * value);
@@ -256,13 +257,29 @@ updateClock();
     const distanceIntoScene = viewportH - 20 - sceneTop;
     const progress = clamp(distanceIntoScene / (viewportH * 1.2), 0, 1);
 
-    // Let the image travel halfway up before any enlargement begins.
+    if (mobile.matches) {
+      // On phones, open to full width early and hold the shorter portrait
+      // until roughly 70% through the sequence before growing to full height.
+      const riseProgress = ease(clamp(progress / 0.42, 0, 1));
+      const widthProgress = ease(clamp(progress / 0.34, 0, 1));
+      const heightProgress = ease(clamp((progress - 0.70) / 0.30, 0, 1));
+      const portraitHeight = 20 + (viewportH * 0.56 - 20) * riseProgress;
+      const height = portraitHeight + (viewportH - portraitHeight) * heightProgress;
+      const top = ((viewportH - height) / 2) * (1 - heightProgress);
+
+      frame.style.top = top + "px";
+      frame.style.width = (70 + 30 * widthProgress) + "vw";
+      frame.style.height = height + "px";
+      frame.style.borderRadius = ((1 - progress) * 3) + "px";
+      image.style.transform = "scale(" + (1.05 - heightProgress * 0.05) + ")";
+      return;
+    }
+
+    // Desktop timing and composition remain unchanged.
     const travelProgress = ease(clamp(progress / 0.45, 0, 1));
     const zoomProgress = ease(clamp((travelProgress - 0.5) / 0.5, 0, 1));
     const portraitHeight = 20 + (viewportH * 0.56 - 20) * zoomProgress;
     const portraitTop = (viewportH - portraitHeight) * (1 - travelProgress / 2);
-
-    // Once centered and full width, continue expanding vertically to the viewport.
     const takeoverProgress = ease(clamp((progress - 0.45) / 0.55, 0, 1));
     const height = portraitHeight + (viewportH - portraitHeight) * takeoverProgress;
     const top = portraitTop * (1 - takeoverProgress);
@@ -280,7 +297,6 @@ updateClock();
 
   function resize() {
     const viewportH = window.visualViewport?.height || window.innerHeight;
-    // End the scene as soon as the full-screen transition completes.
     scene.style.height = (viewportH * 2.2) + "px";
     requestUpdate();
   }
@@ -290,5 +306,6 @@ updateClock();
   window.addEventListener("resize", resize);
   window.addEventListener("orientationchange", resize);
   window.visualViewport?.addEventListener("resize", resize);
+  mobile.addEventListener?.("change", requestUpdate);
   update();
 })();

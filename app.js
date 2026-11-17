@@ -83,7 +83,6 @@ $("rsvp-form").addEventListener("submit", async (event) => {
   const payload = {
     name: form.get("name").trim(),
     email: form.get("email").trim(),
-    phone: form.get("phone").trim(),
     attending: form.get("attending"),
     guest_count: Number(form.get("guest_count"))
   };
@@ -305,7 +304,9 @@ updateClock();
 
   function resize() {
     const viewportH = window.visualViewport?.height || window.innerHeight;
-    scene.style.height = (viewportH * 2.2) + "px";
+    // End the scroll scene as the card finishes entering, so image and card
+    // leave the opening together on the next scroll.
+    scene.style.height = (viewportH * 1.2) + "px";
     requestUpdate();
   }
 

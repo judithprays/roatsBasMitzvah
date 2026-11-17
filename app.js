@@ -274,7 +274,7 @@ updateClock();
       // The invitation card rises over the stationary portrait near the end.
       const cardProgress = ease(clamp((progress - 0.72) / 0.28, 0, 1));
       card.style.transform = "translateY(" + ((1 - cardProgress) * 72) + "px)";
-      card.style.opacity = String(cardProgress);
+      card.style.opacity = "0.7";
       return;
     }
 
@@ -295,7 +295,7 @@ updateClock();
 
     const cardProgress = ease(clamp((progress - 0.72) / 0.28, 0, 1));
     card.style.transform = "translateY(" + ((1 - cardProgress) * 72) + "px)";
-    card.style.opacity = String(cardProgress);
+    card.style.opacity = "0.7";
   }
 
   function requestUpdate() {

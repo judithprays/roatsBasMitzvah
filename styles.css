@@ -791,3 +791,16 @@ main { width: 100%; margin: 0; padding: 0; overflow: hidden; }
 
 /* Sticky needs an unclipped ancestor; horizontal overflow is already hidden on body. */
 main { overflow: visible !important; }
+
+
+/* The single parallax portrait now begins in the former preview's position. */
+.opening-screen {
+  min-height: 75vh !important;
+  min-height: 75svh !important;
+  height: 75vh;
+  height: 75svh;
+  padding: 32px 24px 0 !important;
+}
+.opening-screen p { transform: none !important; }
+.hero-peek { display: none !important; }
+.hero-image-scene { margin-top: 0 !important; }

@@ -383,7 +383,7 @@ footer { padding: 55px 20px; background: var(--ink); color: var(--paper); text-a
 }
 .hero-details .hero-copy {
   opacity: .7;
-  transform: translateY(72px);
+  transform: translateY(100vh);
   will-change: transform;
 }
 @media (max-width: 600px) {

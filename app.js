@@ -258,10 +258,10 @@ updateClock();
     const progress = clamp(distanceIntoScene / (viewportH * 1.2), 0, 1);
 
     if (mobile.matches) {
-      // Rise to the vertical center, expand to the full screen width, then hold.
+      // Reveal the portrait first, using the card's exact rendered height so
+      // the two surfaces lock together without a size mismatch.
       const reveal = ease(clamp(progress / 0.45, 0, 1));
-      const height = 20 + (viewportH * 0.56 - 20) * reveal;
-      // Start peeking up from the bottom, then stop with the portrait centered.
+      const height = card.getBoundingClientRect().height || viewportH * 0.56;
       const startTop = viewportH - 20;
       const centeredTop = (viewportH - height) / 2;
       const top = startTop + (centeredTop - startTop) * reveal;
@@ -271,11 +271,14 @@ updateClock();
       frame.style.borderRadius = "0";
       image.style.transform = "scale(1.04)";
 
-      // Wait until the portrait is fully centered. Then take a slower path
-      // from below the viewport to the portrait's top edge.
-      const cardProgress = ease(clamp((progress - 0.45) / 0.55, 0, 1));
+      // Hold the portrait completely still after it locks into place.
+      // Only then does the card begin its entrance, overlaying the image
+      // at exactly the same width and height.
+      const cardProgress = ease(clamp((progress - 0.50) / 0.50, 0, 1));
       const cardTop = (viewportH - height) / 2;
       const cardY = cardTop + (viewportH - cardTop) * (1 - cardProgress);
+      card.style.height = height + "px";
+      card.style.boxSizing = "border-box";
       card.style.transform = "translateY(" + cardY + "px)";
       card.style.opacity = "0.7";
       return;

@@ -476,3 +476,22 @@ footer { padding: 55px 20px; background: var(--ink); color: var(--paper); text-a
     background: rgba(247, 238, 237, .78);
   }
 }
+
+
+/* Voice-note prompts sit beneath the recorder and inherit the original section style. */
+.voice-ideas {
+  max-width: 480px;
+  margin: 30px auto 0;
+  color: var(--muted);
+  text-align: left;
+  font-size: 14px;
+  line-height: 1.8;
+}
+.voice-ideas p { margin: 0 0 10px; }
+.voice-ideas ul { margin: 0; padding-left: 22px; }
+.voice-ideas li { padding: 2px 0; }
+.voice > h3 {
+  margin: -8px 0 22px;
+  color: var(--deep);
+  font: italic 22px "Playfair Display", serif;
+}

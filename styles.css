@@ -836,3 +836,47 @@ main { overflow: visible !important; }
     height: 30svh;
   }
 }
+
+
+/* Final opening choreography: a 20px portrait peek, then expand on the first scroll. */
+.opening-screen {
+  height: 100vh !important;
+  height: 100svh !important;
+  min-height: 100vh !important;
+  min-height: 100svh !important;
+  padding: 32px 24px 20px !important;
+  display: grid;
+  place-items: center;
+}
+.hero-image-scene {
+  height: 120vh !important;
+  height: 120svh !important;
+  min-height: 0 !important;
+  margin-top: -20px !important;
+  overflow: visible !important;
+  background: transparent !important;
+}
+.hero-image-scene .hero-image {
+  position: sticky !important;
+  top: calc(100svh - 20px) !important;
+  width: 70vw !important;
+  height: 20px !important;
+  margin: 0 auto !important;
+  border-radius: 3px 3px 0 0 !important;
+  overflow: hidden !important;
+  background: #211b1b !important;
+  will-change: width, height, top, border-radius;
+}
+.hero-image-scene .hero-image img {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center 42% !important;
+  transform: scale(1.2);
+  will-change: transform;
+}
+@media (max-width: 600px) {
+  .hero-image-scene .hero-image { width: 70vw !important; height: 20px !important; }
+}

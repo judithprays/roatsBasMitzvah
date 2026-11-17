@@ -260,6 +260,7 @@ updateClock();
     frame.style.width = width + "%";
     frame.style.height = height + "svh";
     frame.style.borderRadius = radius + "px";
+    frame.style.transform = `translate3d(0, ${(1 - eased) * 21}svh, 0)`;
     image.style.transform = `translate3d(0, ${(0.5 - progress) * 54}px, 0) scale(${1.08 - eased * 0.08})`;
   };
   const requestUpdate = () => {

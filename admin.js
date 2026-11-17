@@ -52,7 +52,7 @@ function renderDashboard(data) {
   $("no-count").textContent = no.length;
   $("song-count").textContent = data.songs.length;
   renderTable("rsvp-rows", data.rsvps, [
-    { key: 1 }, { key: 2 }, { key: 3 }, { key: 4 }, { key: 5 },
+    { key: 1 }, { key: 2 }, { key: 3 }, { key: 4 }, { key: 5 }, { key: 6 },
     { key: 0, format: formatDate }
   ]);
   renderTable("song-rows", data.songs, [
@@ -142,7 +142,7 @@ function downloadCsv(filename, rows) {
   URL.revokeObjectURL(url);
 }
 $("export-rsvps").addEventListener("click", () => downloadCsv("roat-rsvps.csv", [
-  ["Timestamp", "Name", "Email", "Phone", "Attending", "Guest Count"],
+  ["Timestamp", "Name", "Email", "Phone", "Attending", "Guest Count", "Dance Floor Song"],
   ...dashboardData.rsvps
 ]));
 $("export-songs").addEventListener("click", () => downloadCsv("roat-song-requests.csv", [

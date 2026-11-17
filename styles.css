@@ -584,3 +584,98 @@ main { width: 100%; margin: 0; padding: 0; overflow: hidden; }
     text-align: left;
   }
 }
+
+
+/* New opening sequence: quiet title, full-screen portrait, then invitation details. */
+.opening-screen {
+  min-height: 100vh;
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  padding: 32px 24px;
+  background: var(--paper);
+  text-align: center;
+}
+.opening-screen p {
+  margin: 0;
+  color: var(--ink);
+  font: 600 clamp(13px, 1.35vw, 17px)/2 "DM Sans", sans-serif;
+  letter-spacing: .18em;
+}
+.hero-image-scene {
+  position: relative;
+  height: 100vh;
+  height: 100svh;
+  min-height: 560px;
+  overflow: hidden;
+  isolation: isolate;
+  background: #211b1b;
+}
+.hero-image-scene .hero-image {
+  position: absolute;
+  inset: -14% 0;
+  width: 100%;
+  height: 128%;
+  overflow: hidden;
+  background: #211b1b;
+  z-index: 0;
+}
+.hero-image-scene .hero-image img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 42%;
+  transform: translate3d(0, 0, 0);
+  will-change: transform;
+}
+.hero-image-scene .hero-image::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(206, 135, 152, .22);
+  mix-blend-mode: color;
+  pointer-events: none;
+}
+.hero-details {
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 64px 24px;
+  background: var(--paper);
+}
+.hero-details .hero-copy {
+  flex: none;
+  width: min(680px, 100%);
+  max-width: 680px;
+  margin: 0 auto;
+  padding: clamp(32px, 6vw, 76px);
+  background: transparent;
+  text-align: center;
+}
+.hero-details .hero-copy .hero-name {
+  font-size: clamp(112px, 20vw, 230px);
+  margin: 0 0 34px;
+}
+.hero-details .hero-copy .event-type {
+  margin: 0 0 18px;
+  font-size: clamp(11px, 1.4vw, 15px);
+  line-height: 1.8;
+}
+.hero-details .hero-copy .hero-date { margin: 0 0 10px; }
+.hero-details .hero-copy .hero-note { margin: 0 0 28px; }
+@media (max-width: 600px) {
+  .opening-screen { min-height: 100svh; }
+  .opening-screen p { font-size: 12px; letter-spacing: .14em; }
+  .hero-image-scene { min-height: 0; height: 100svh; }
+  .hero-image-scene .hero-image { inset: -10% 0; height: 120%; }
+  .hero-details { min-height: 100svh; padding: 48px 18px; }
+  .hero-details .hero-copy { padding: 24px 12px; }
+  .hero-details .hero-copy .hero-name { font-size: clamp(108px, 28vw, 160px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-image-scene .hero-image img { transform: none !important; }
+}

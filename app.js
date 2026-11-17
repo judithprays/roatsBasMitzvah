@@ -255,8 +255,8 @@ updateClock();
     const eased = progress * progress * (3 - 2 * progress);
 
     // Grow the portrait from a framed peek to a true edge-to-edge screen.
-    frame.style.width = (78 + eased * 22) + "vw";
-    frame.style.height = (25 + eased * 75) + "vh";
+    frame.style.width = (84 + eased * 16) + "vw";
+    frame.style.height = (30 + eased * 70) + "vh";
     frame.style.borderRadius = ((1 - eased) * 4) + "px";
     frame.style.transform = "translate3d(0,0,0)";
 
@@ -270,7 +270,7 @@ updateClock();
   };
 
   const sizeScene = () => {
-    scene.style.height = (window.innerHeight * 1.8) + "px";
+    scene.style.height = (window.innerHeight * 1.45) + "px";
     requestUpdate();
   };
 

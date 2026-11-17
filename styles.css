@@ -382,9 +382,9 @@ footer { padding: 55px 20px; background: var(--ink); color: var(--paper); text-a
   padding: 56px 30px 56px 24px;
 }
 .hero-details .hero-copy {
-  opacity: 0;
+  opacity: .7;
   transform: translateY(72px);
-  will-change: transform, opacity;
+  will-change: transform;
 }
 @media (max-width: 600px) {
   .hero-details {

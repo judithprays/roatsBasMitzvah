@@ -253,7 +253,7 @@ updateClock();
       prompt.textContent = ideas[index];
       prompt.classList.remove("is-fading");
     }, 450);
-  }, 3000);
+  }, 2000);
 })();
 
 // Scroll-driven opening: portrait reveal with responsive invitation-card entrance.

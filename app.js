@@ -259,9 +259,8 @@ updateClock();
     frame.style.height = frameHeight + "px";
     frame.style.borderRadius = ((1 - eased) * 3) + "px";
 
-    // Subtle image movement inside the expanding frame adds the parallax depth.
-    const drift = (0.5 - progress) * Math.min(100, viewportH * 0.12);
-    image.style.transform = "translate3d(0," + drift + "px,0) scale(" + (1.2 - eased * 0.2) + ")";
+    // Keep the top of the portrait visible in the initial peek; scale adds depth as it opens.
+    image.style.transform = "scale(" + (1.2 - eased * 0.2) + ")";
   };
 
   const requestUpdate = () => {

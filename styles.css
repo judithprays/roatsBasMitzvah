@@ -247,8 +247,7 @@ main { width: 100%; margin: 0; padding: 0; overflow: hidden; }
   mix-blend-mode: color;
   pointer-events: none;
 }
-.hero-invite {
-  position: absolute;
+.hero-invite {  position: absolute;
   z-index: 2;
   top: clamp(24px, 4vw, 54px);
   left: clamp(24px, 4vw, 58px);
@@ -497,8 +496,7 @@ main { width: 100%; margin: 0; padding: 0; overflow: hidden; }
   .hero-image img {
     position: relative;
     inset: auto;
-    display: block;
-    width: 100%;
+    display: block;    width: 100%;
     height: auto;
     max-width: 100%;
     object-fit: contain;
@@ -753,4 +751,40 @@ main { width: 100%; margin: 0; padding: 0; overflow: hidden; }
 @media (prefers-reduced-motion: reduce) {
   .hero-image-scene .hero-image { width: 100% !important; height: 100svh !important; }
   .hero-image-scene .hero-image img { transform: none !important; }
+}
+
+/* Final, browser-independent opening portrait transition. */
+.hero-image-scene {
+  height: 180vh !important;
+  min-height: 0 !important;
+  overflow: visible !important;
+  background: transparent !important;
+}
+.hero-image-scene .hero-image {
+  position: sticky !important;
+  top: 0 !important;
+  inset: auto !important;
+  width: 78vw;
+  height: 25vh;
+  margin: 0 auto !important;
+  overflow: hidden !important;
+  border-radius: 4px;
+  background: #211b1b;
+  will-change: width, height, transform, border-radius;
+}
+.hero-image-scene .hero-image img {
+  position: absolute !important;
+  inset: 0 !important;
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
+  object-fit: cover !important;
+  object-position: center 42% !important;
+  transform: translate3d(0,0,0) scale(1.2);
+  will-change: transform;
+}
+@media (max-width: 600px) {
+  .hero-image-scene { height: 180vh !important; }
+  .hero-image-scene .hero-image { width: 82vw; height: 23vh; }
 }

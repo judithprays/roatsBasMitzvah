@@ -416,8 +416,8 @@ footer { padding: 55px 20px; background: var(--ink); color: var(--paper); text-a
 /* Desktop keeps the original full-screen portrait sequence. */
 @media (min-width: 601px) {
   .hero-image-scene {
-    height: 340vh;
-    height: 340svh;
+    height: 220vh;
+    height: 220svh;
   }
   .hero-stage {
     display: contents;

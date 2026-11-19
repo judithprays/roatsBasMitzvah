@@ -323,7 +323,9 @@ updateClock();
     const viewportH = window.visualViewport?.height || window.innerHeight;
     // Mobile needs a short pinned hold for the card entrance. Desktop retains
     // its original long scroll-driven portrait sequence.
-    scene.style.height = (viewportH * (mobile.matches ? 3.4 : 340)) + "px";
+    // Desktop needs about 1.2 viewport-heights of scroll travel for the animation.
+    // The scene itself includes the pinned viewport, so keep it near 2.2x total.
+    scene.style.height = (viewportH * (mobile.matches ? 3.4 : 2.2)) + "px";
     requestUpdate();
   }
 

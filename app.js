@@ -79,7 +79,8 @@ async function submitToGoogle(action, fields, messageId, successMessage) {
 
 $("rsvp-form").addEventListener("submit", async (event) => {
   event.preventDefault();
-  const form = new FormData(event.currentTarget);
+  const formElement = event.currentTarget;
+  const form = new FormData(formElement);
   const payload = {
     name: form.get("name").trim(),
     email: form.get("email").trim(),
@@ -87,12 +88,12 @@ $("rsvp-form").addEventListener("submit", async (event) => {
     guest_count: Number(form.get("guest_count")),
     song: form.get("song").trim()
   };
-  const button = event.currentTarget.querySelector('button[type="submit"]');
+  const button = formElement.querySelector('button[type="submit"]');
   button.disabled = true;
   showToast("Sending your RSVP…");
   try {
     await submitToGoogle("rsvp", payload, "rsvp-message");
-    event.currentTarget.reset();
+    formElement.reset();
   } catch (error) { setMessage("rsvp-message", error.message); }
   finally { button.disabled = false; }
 });

@@ -142,17 +142,30 @@ $("record-button").addEventListener("click", async () => {
     }
     recordingStream = await navigator.mediaDevices.getUserMedia({ audio: true });
     recorder = new MediaRecorder(recordingStream);
+    const activeRecorder = recorder;
     chunks = [];
-    recorder.ondataavailable = (event) => { if (event.data.size) chunks.push(event.data); };
-    recorder.onstop = () => {
-      audioBlob = new Blob(chunks, { type: recorder.mimeType || "audio/webm" });
-      audioUrl = URL.createObjectURL(audioBlob);
-      $("preview-audio").src = audioUrl;
+    activeRecorder.ondataavailable = (event) => { if (event.data.size) chunks.push(event.data); };
+    activeRecorder.onerror = () => {
+      setMessage("voice-message", "The recording ran into a problem. Please try again.");
+      resetRecording();
+    };
+    activeRecorder.onstop = () => {
+      audioBlob = new Blob(chunks, { type: activeRecorder.mimeType || chunks[0]?.type || "audio/webm" });
+      $("record-button").classList.remove("is-recording");
+      $("record-label").textContent = "START RECORDING";
+      $("record-button").disabled = false;
       $("record-controls").hidden = true;
       $("voice-review").hidden = false;
-      $("submit-voice").disabled = seconds === 0;
+      $("submit-voice").disabled = !audioBlob.size || seconds === 0;
       recordingStream?.getTracks().forEach(track => track.stop());
       recordingStream = null;
+      if (!audioBlob.size) {
+        setMessage("voice-message", "We couldn't capture that recording. Please try again.");
+        $("submit-voice").disabled = true;
+        return;
+      }
+      audioUrl = URL.createObjectURL(audioBlob);
+      $("preview-audio").src = audioUrl;
       setMessage("voice-message", "Listen back, then submit when you're happy with it.");
     };
     recorder.start();
@@ -174,12 +187,14 @@ $("record-button").addEventListener("click", async () => {
 function stopRecording() {
   if (recorder?.state === "recording") {
     clearInterval(elapsedTimer);
-    seconds = Math.floor((Date.now() - startedAt) / 1000);
+    const durationMs = Date.now() - startedAt;
+    seconds = durationMs > 0 ? Math.max(1, Math.ceil(durationMs / 1000)) : 0;
     updateClock();
-    recorder.stop();
-    $("record-button").classList.remove("is-recording");
+    $("record-label").textContent = "PREPARING RECORDING…";
+    $("record-button").disabled = true;
     $("stop-button").hidden = true;
     $("stop-button").disabled = true;
+    recorder.stop();
   }
 }
 $("stop-button").addEventListener("click", stopRecording);
@@ -204,19 +219,21 @@ $("submit-voice").addEventListener("click", async () => {
     return;
   }
   $("submit-voice").disabled = true;
+  setMessage("voice-message", "Uploading your message…");
   try {
     const audioBase64 = await blobToBase64(audioBlob);
+    if (!audioBase64) throw new Error("The recording file is empty. Please record again.");
     await submitToGoogle("voice", {
       name,
       duration_seconds: seconds,
       content_type: audioBlob.type || "audio/webm",
       audio_base64: audioBase64
-    }, "voice-message");
+    }, "voice-message", "Your voice message is saved!");
     $("voice-name").value = "";
     resetRecording();
   } catch (error) {
     $("submit-voice").disabled = false;
-    setMessage("voice-message", error.message);
+    setMessage("voice-message", error.message || "We couldn't save your message. Please try again.");
   }
 });
 updateClock();

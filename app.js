@@ -224,6 +224,7 @@ $("submit-voice").addEventListener("click", async () => {
   }
   $("submit-voice").disabled = true;
   setMessage("voice-message", "Uploading your message…");
+  showToast("Uploading your message…");
   try {
     const audioBase64 = await blobToBase64(audioBlob);
     if (!audioBase64) throw new Error("The recording file is empty. Please record again.");
@@ -237,7 +238,9 @@ $("submit-voice").addEventListener("click", async () => {
     setMessage("voice-message", "Your message is saved. Thanks! Submit another if you like");
   } catch (error) {
     $("submit-voice").disabled = false;
-    setMessage("voice-message", error.message || "We couldn't save your message. Please try again.");
+    const errorMessage = error.message || "We couldn't save your message. Please try again.";
+    setMessage("voice-message", errorMessage);
+    showToast(errorMessage, true);
   }
 });
 updateClock();

@@ -152,9 +152,9 @@ $("record-button").addEventListener("click", async () => {
     activeRecorder.onstop = () => {
       audioBlob = new Blob(chunks, { type: activeRecorder.mimeType || chunks[0]?.type || "audio/webm" });
       $("record-button").classList.remove("is-recording");
-      $("record-label").textContent = "START RECORDING";
+      $("record-label").textContent = "RE-RECORD";
       $("record-button").disabled = false;
-      $("record-controls").hidden = true;
+      $("record-controls").hidden = false;
       $("voice-review").hidden = false;
       $("submit-voice").disabled = !audioBlob.size || seconds === 0;
       recordingStream?.getTracks().forEach(track => track.stop());
@@ -166,7 +166,7 @@ $("record-button").addEventListener("click", async () => {
       }
       audioUrl = URL.createObjectURL(audioBlob);
       $("preview-audio").src = audioUrl;
-      setMessage("voice-message", "Listen back, then submit when you're happy with it.");
+      setMessage("voice-message", "");
     };
     recorder.start();
     startedAt = Date.now();
@@ -198,10 +198,6 @@ function stopRecording() {
   }
 }
 $("stop-button").addEventListener("click", stopRecording);
-$("discard-voice").addEventListener("click", () => {
-  resetRecording();
-  setMessage("voice-message", "Ready for another take.");
-});
 
 function blobToBase64(blob) {
   return new Promise((resolve, reject) => {
@@ -213,7 +209,7 @@ function blobToBase64(blob) {
 }
 $("submit-voice").addEventListener("click", async () => {
   const name = $("voice-name").value.trim();
-  if (!name) { setMessage("voice-message", "Please add your name first."); $("voice-name").focus(); return; }
+  if (!name) { setMessage("voice-message", "Please add your name first."); return; }
   if (!audioBlob || seconds === 0) {
     setMessage("voice-message", "Please record a message before submitting.");
     return;
@@ -228,9 +224,9 @@ $("submit-voice").addEventListener("click", async () => {
       duration_seconds: seconds,
       content_type: audioBlob.type || "audio/webm",
       audio_base64: audioBase64
-    }, "voice-message", "Your voice message is saved!");
-    $("voice-name").value = "";
+    }, "voice-message", "Your message is saved. Thanks! Submit another if you like");
     resetRecording();
+    setMessage("voice-message", "Your message is saved. Thanks! Submit another if you like");
   } catch (error) {
     $("submit-voice").disabled = false;
     setMessage("voice-message", error.message || "We couldn't save your message. Please try again.");

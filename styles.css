@@ -437,6 +437,7 @@ footer { padding: 55px 20px; background: var(--ink); color: var(--paper); text-a
 @media (max-width: 600px) {
   .hero-image-scene {
     height: 220svh;
+    margin-top: -70px;
   }
   .hero-stage {
     position: sticky;
@@ -448,6 +449,7 @@ footer { padding: 55px 20px; background: var(--ink); color: var(--paper); text-a
     position: absolute;
     left: 0;
     right: 0;
+    top: 20px;
   }
   .hero-details {
     position: absolute;

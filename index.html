@@ -65,12 +65,9 @@
           <button class="text-button" id="stop-button" type="button" hidden>STOP</button>
         </div>
         <div class="voice-review" id="voice-review" hidden>
-          <label>Your name<input id="voice-name" maxlength="100" placeholder="Your name" autocomplete="name" required></label>
           <audio id="preview-audio" controls></audio>
-          <div class="record-actions">
-            <button class="secondary-button" id="submit-voice" type="button" disabled>SUBMIT MESSAGE ↗</button>
-            <button class="text-button" id="discard-voice" type="button">RE-RECORD</button>
-          </div>
+          <input id="voice-name" maxlength="100" placeholder="Your name" autocomplete="name" aria-label="Your name" required>
+          <button class="secondary-button" id="submit-voice" type="button" disabled>SUBMIT</button>
         </div>
         <p class="form-message" id="voice-message" role="status"></p>
       </div>

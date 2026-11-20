@@ -76,7 +76,7 @@
         </div>
         <div class="voice-review" id="voice-review" hidden>
           <audio id="preview-audio" controls></audio>
-          <input id="voice-name" maxlength="100" placeholder="Your name" autocomplete="name" aria-label="Your name" required>
+          <input id="voice-name" maxlength="100" placeholder="Your name (optional)" autocomplete="name" aria-label="Your name (optional)">
           <button class="secondary-button" id="submit-voice" type="button" disabled>SUBMIT</button>
         </div>
         <p class="form-message" id="voice-message" role="status"></p>
@@ -92,17 +92,17 @@
     <section class="rsvp section" id="rsvp">
       <p class="eyebrow">SAVE YOUR SPOT</p>
       <form id="rsvp-form" class="form-card">
-        <label>Your name<input name="name" autocomplete="name" required maxlength="100" placeholder="Your name"></label>
-        <label>Email address<input name="email" type="email" autocomplete="email" required maxlength="254" placeholder="you@example.com"></label>
+        <label>Your name<input name="name" autocomplete="name" maxlength="100" placeholder="Your name (optional)"></label>
+        <label>Email address<input name="email" type="email" autocomplete="email" maxlength="254" placeholder="you@example.com (optional)"></label>
         <label>Are you joining us?
-          <select name="attending" required>
+          <select name="attending">
             <option value="">Choose one</option>
             <option value="yes">Yes, can't wait!</option>
             <option value="no">Sorry, can't make it</option>
           </select>
         </label>
         <label>Number of guests, including you
-          <input name="guest_count" type="number" min="1" max="20" value="1" required>
+          <input name="guest_count" type="number" min="1" max="20" value="1">
         </label>
         <label>A song that gets you on the dance floor
           <input name="song" maxlength="500" placeholder="Song + artist, or a link">

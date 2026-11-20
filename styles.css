@@ -578,3 +578,9 @@ body {
 @media (max-width: 700px) {
   .recorder-card #voice-name { font-size: 16px; }
 }
+
+
+/* The audio player and name field stay hidden until a recording is ready. */
+.recorder-card .voice-review[hidden] {
+  display: none;
+}

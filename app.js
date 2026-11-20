@@ -284,7 +284,7 @@ updateClock();
       // Hold the portrait completely still after it locks into place.
       // Only then does the card begin its entrance, overlaying the image
       // at exactly the same width and height.
-      const cardProgress = ease(clamp((progress - 0.50) / 1.00, 0, 1));
+      const cardProgress = ease(clamp((progress - 0.50) / 0.70, 0, 1));
       const cardTop = (viewportH - height) / 2;
       const cardY = cardTop + (viewportH - cardTop) * (1 - cardProgress);
       card.style.height = height + "px";
@@ -325,7 +325,7 @@ updateClock();
     // its original long scroll-driven portrait sequence.
     // Desktop needs about 1.2 viewport-heights of scroll travel for the animation.
     // The scene itself includes the pinned viewport, so keep it near 2.2x total.
-    scene.style.height = (viewportH * (mobile.matches ? 3.4 : 2.2)) + "px";
+    scene.style.height = (viewportH * (mobile.matches ? 2.7 : 2.2)) + "px";
     requestUpdate();
   }
 

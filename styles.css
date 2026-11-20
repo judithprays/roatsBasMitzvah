@@ -339,7 +339,8 @@ footer { padding: 55px 20px; background: var(--ink); color: var(--paper); text-a
 }
 @media (max-width: 600px) {
   .opening-screen p {
-    font-size: 10px;
+    font-size: 20px;
+    line-height: 1.65;
     letter-spacing: .14em;
   }
   .hero-image-scene .hero-image {

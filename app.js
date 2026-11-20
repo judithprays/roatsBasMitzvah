@@ -137,6 +137,14 @@ function resetRecording() {
 }
 $("record-button").addEventListener("click", async () => {
   try {
+    if ($("record-label").textContent === "RE-RECORD") {
+      if (audioUrl) URL.revokeObjectURL(audioUrl);
+      audioUrl = null;
+      audioBlob = null;
+      $("preview-audio").removeAttribute("src");
+      $("voice-review").hidden = true;
+      $("submit-voice").disabled = true;
+    }
     if (!navigator.mediaDevices?.getUserMedia || !window.MediaRecorder) {
       throw new Error("In-browser recording isn't supported here. Try the latest version of Safari or Chrome.");
     }

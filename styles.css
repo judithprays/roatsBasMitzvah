@@ -557,3 +557,25 @@ body {
   letter-spacing: -.07em;
   white-space: nowrap;
 }
+
+
+/* Recorder review layout and iOS Safari input sizing. */
+.recorder-card .voice-review {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.recorder-card .voice-review audio { margin: 0; }
+.recorder-card #voice-name {
+  display: block;
+  width: 100%;
+  min-height: 48px;
+  margin: 0;
+  font-size: 16px;
+  text-align: left;
+}
+.recorder-card #submit-voice { width: 100%; margin: 0; }
+.recorder-card .record-controls:has(+ .voice-review:not([hidden])) { margin-bottom: 18px; }
+@media (max-width: 700px) {
+  .recorder-card #voice-name { font-size: 16px; }
+}

@@ -506,3 +506,43 @@ footer { padding: 55px 20px; background: var(--ink); color: var(--paper); text-a
     height: 50px;
   }
 }
+
+
+/* Prevent small horizontal overflow on narrow mobile screens. */
+html,
+body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+@media (max-width: 600px) {
+  main,
+  .section,
+  .opening-screen,
+  .hero-image-scene,
+  .hero-stage,
+  .hero-details,
+  .voice-prompt {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .voice-prompt {
+    width: 100%;
+    padding-inline: 18px;
+    font-size: clamp(42px, 12vw, 68px);
+    overflow-wrap: anywhere;
+  }
+
+  .hero-details .hero-copy {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  img,
+  video,
+  audio {
+    max-width: 100%;
+  }
+}

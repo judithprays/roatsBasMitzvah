@@ -353,6 +353,22 @@ updateClock();
   window.addEventListener("scroll", requestUpdate, { passive: true });
   window.addEventListener("resize", resize);
   window.addEventListener("orientationchange", resize);
-  mobile.addEventListener?.("change", requestUpdate);
+  mobile.addEventListener?.("change", resize);
+
+  // On a cold visit, the image and web fonts can finish loading after the
+  // first animation frame. Recalculate the reveal once those dimensions settle
+  // so the portrait and invitation card use their final, matching heights.
+  image.addEventListener("load", requestUpdate, { once: true });
+  if (typeof image.decode === "function") {
+    image.decode().then(requestUpdate).catch(requestUpdate);
+  }
+  if (document.fonts?.ready) {
+    document.fonts.ready.then(requestUpdate);
+  }
+  if ("ResizeObserver" in window) {
+    const layoutObserver = new ResizeObserver(requestUpdate);
+    layoutObserver.observe(card);
+  }
+
   update();
 })();

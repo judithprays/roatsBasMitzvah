@@ -217,7 +217,6 @@ function blobToBase64(blob) {
 }
 $("submit-voice").addEventListener("click", async () => {
   const name = $("voice-name").value.trim();
-  if (!name) { setMessage("voice-message", "Please add your name first."); return; }
   if (!audioBlob || seconds === 0) {
     setMessage("voice-message", "Please record a message before submitting.");
     return;

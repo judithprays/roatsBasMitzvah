@@ -548,3 +548,13 @@ body {
     max-width: 100%;
   }
 }
+
+
+/* Give the opening gratitude line the same bold editorial presence as the photo headings. */
+.gratitude-heading {
+  display: inline-block;
+  color: var(--ink);
+  font: 900 clamp(18px, 5.5vw, 64px)/.95 "DM Sans", sans-serif;
+  letter-spacing: -.07em;
+  white-space: nowrap;
+}

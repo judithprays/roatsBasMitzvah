@@ -155,7 +155,7 @@ $("record-button").addEventListener("click", async () => {
     chunks = [];
     activeRecorder.ondataavailable = (event) => { if (event.data.size) chunks.push(event.data); };
     activeRecorder.onerror = () => {
-      setMessage("voice-message", "The recording ran into a problem. Please try again.");
+      showToast("The recording ran into a problem. Please try again.", true);
       resetRecording();
     };
     activeRecorder.onstop = () => {
@@ -169,13 +169,12 @@ $("record-button").addEventListener("click", async () => {
       recordingStream?.getTracks().forEach(track => track.stop());
       recordingStream = null;
       if (!audioBlob.size) {
-        setMessage("voice-message", "We couldn't capture that recording. Please try again.");
+        showToast("We couldn't capture that recording. Please try again.", true);
         $("submit-voice").disabled = true;
         return;
       }
       audioUrl = URL.createObjectURL(audioBlob);
       $("preview-audio").src = audioUrl;
-      setMessage("voice-message", "");
     };
     recorder.start();
     startedAt = Date.now();
@@ -191,7 +190,7 @@ $("record-button").addEventListener("click", async () => {
       updateClock();
       if (seconds >= MAX_RECORDING_SECONDS) stopRecording();
     }, 250);
-  } catch (error) { setMessage("voice-message", error.message); }
+  } catch (error) { showToast(error.message, true); }
 });
 function stopRecording() {
   if (recorder?.state === "recording") {
@@ -219,11 +218,10 @@ function blobToBase64(blob) {
 $("submit-voice").addEventListener("click", async () => {
   const name = $("voice-name").value.trim();
   if (!audioBlob || seconds === 0) {
-    setMessage("voice-message", "Please record a message before submitting.");
+    showToast("Please record a message before submitting.", true);
     return;
   }
   $("submit-voice").disabled = true;
-  setMessage("voice-message", "Uploading your message…");
   showToast("Uploading your message…");
   try {
     const audioBase64 = await blobToBase64(audioBlob);
@@ -235,11 +233,9 @@ $("submit-voice").addEventListener("click", async () => {
       audio_base64: audioBase64
     }, "voice-message", "Your message is saved. Thanks! Submit another if you like");
     resetRecording();
-    setMessage("voice-message", "Your message is saved. Thanks! Submit another if you like");
   } catch (error) {
     $("submit-voice").disabled = false;
     const errorMessage = error.message || "We couldn't save your message. Please try again.";
-    setMessage("voice-message", errorMessage);
     showToast(errorMessage, true);
   }
 });

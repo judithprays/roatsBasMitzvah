@@ -16,7 +16,7 @@ main { overflow: visible; }
 .primary-button { color: var(--white); background: var(--ink); box-shadow: 0 8px 18px #30252a22; }.secondary-button { color: var(--ink); background: var(--pink); }
 .primary-button:hover, .secondary-button:hover { transform: translateY(-2px); box-shadow: 0 10px 20px #30252a22; }
 .hero-note { font-family: "Playfair Display", serif; font-style: italic; color: var(--muted); font-size: 16px; margin: 25px 0 0; }
-.section { padding: 100px 22px; text-align: center; }.section h2 { font-size: clamp(48px, 9vw, 86px); line-height: .92; letter-spacing: -.07em; margin: 0 0 24px; font-weight: 900; }.section h2 em { color: var(--deep); font-family: "Playfair Display", serif; font-weight: 600; letter-spacing: -.06em; }
+.section { padding: 100px 22px; text-align: center; }.section h2 { font-size: clamp(48px, 9vw, 86px); line-height: .92; letter-spacing: -.07em; margin: 0 0 24px; font-weight: 900; }.section h2 em { }
 .details { background: #f0dadd; }
 .heat-section { position: relative; isolation: isolate; overflow: hidden; color: var(--white); background: #211b1b; }
 .heat-video, .heat-overlay { position: absolute; inset: 0; width: 100%; height: 100%; }
@@ -170,12 +170,7 @@ footer { padding: 55px 20px; background: var(--ink); color: var(--paper); text-a
   text-align: center;
   text-shadow: 0 3px 28px #24151d80;
 }
-.photo-heading em {
-  color: #ffd2df;
-  font-family: "Playfair Display", serif;
-  font-weight: 600;
-  letter-spacing: -.06em;
-}
+.photo-heading em { }
 @media (max-width: 600px) {
   .mad-section { min-height: 95svh; }
   .photo-heading {
@@ -480,16 +475,20 @@ footer { padding: 55px 20px; background: var(--ink); color: var(--paper); text-a
 }
 
 
-/* Rotating prompt uses the same pink italic treatment as section headings. */
-.voice-prompt {
-  min-height: 1.6em;
-  margin: 80px auto 0;
+/* Shared pink italic treatment. Apply this class wherever the accent appears. */
+.pink-italic {
   color: var(--deep);
   font-family: "Playfair Display", serif;
-  font-size: clamp(100px, 20vw, 136px);
   font-style: italic;
   font-weight: 600;
   letter-spacing: -.06em;
+}
+
+/* Rotating prompt uses the shared pink italic treatment. */
+.voice-prompt {
+  min-height: 1.6em;
+  margin: 80px auto 0;
+  font-size: clamp(100px, 20vw, 136px);
   line-height: 1.4;
   text-align: center;
   opacity: 1;

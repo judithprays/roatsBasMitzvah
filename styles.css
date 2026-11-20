@@ -532,7 +532,6 @@ body {
   .voice-prompt {
     width: 100%;
     padding-inline: 18px;
-    font-size: clamp(42px, 12vw, 68px);
     overflow-wrap: anywhere;
   }
 

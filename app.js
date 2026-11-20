@@ -283,7 +283,7 @@ updateClock();
 
   function update() {
     raf = 0;
-    const viewportH = window.visualViewport?.height || window.innerHeight;
+    const viewportH = window.innerHeight;
     const sceneTop = scene.getBoundingClientRect().top;
     const distanceIntoScene = viewportH - 20 - sceneTop;
     const progress = clamp(distanceIntoScene / (viewportH * 1.2), 0, mobile.matches ? 2 : 1);
@@ -341,7 +341,7 @@ updateClock();
   }
 
   function resize() {
-    const viewportH = window.visualViewport?.height || window.innerHeight;
+    const viewportH = window.innerHeight;
     // Mobile needs a short pinned hold for the card entrance. Desktop retains
     // its original long scroll-driven portrait sequence.
     // Desktop needs about 1.2 viewport-heights of scroll travel for the animation.
@@ -354,7 +354,6 @@ updateClock();
   window.addEventListener("scroll", requestUpdate, { passive: true });
   window.addEventListener("resize", resize);
   window.addEventListener("orientationchange", resize);
-  window.visualViewport?.addEventListener("resize", resize);
   mobile.addEventListener?.("change", requestUpdate);
   update();
 })();

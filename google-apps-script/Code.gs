@@ -63,12 +63,9 @@ function doPost(e) {
       const name = clean_(p.name, 100);
       const email = clean_(p.email, 254);
       const phone = clean_(p.phone, 40);
-      const attending = p.attending === "yes" ? "Yes" : "No";
+      const attending = p.attending === "yes" ? "Yes" : p.attending === "no" ? "No" : "";
       const guests = Math.max(1, Math.min(20, Number(p.guest_count) || 1));
       const song = clean_(p.song, 500);
-      if (!name || !email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        throw new Error("Please provide a name and valid email address.");
-      }
       ss.getSheetByName("RSVPs").appendRow([now, name, email, phone, attending, guests, song]);
       return reply_(true, "Your RSVP is in. Thank you!", requestId);
     }
@@ -85,14 +82,13 @@ function doPost(e) {
       const name = clean_(p.name, 100);
       const duration = Number(p.duration_seconds);
       const encoded = p.audio_base64 || "";
-      if (!name) throw new Error("Please add your name.");
       if (!Number.isFinite(duration) || duration <= 0) throw new Error("Please record a voice message before submitting.");
       if (duration > 30) throw new Error("Voice messages can be up to 30 seconds.");
       if (!encoded || encoded.length > 8000000) throw new Error("The recording is missing or too large. Please try again.");
       const bytes = Utilities.base64Decode(encoded);
       const type = clean_(p.content_type || "audio/webm", 80);
       const extension = type.indexOf("mp4") >= 0 ? "m4a" : "webm";
-      const blob = Utilities.newBlob(bytes, type, "Roat voice message - " + name + "." + extension);
+      const blob = Utilities.newBlob(bytes, type, "Roat voice message - " + (name || "Guest") + "." + extension);
       const folder = DriveApp.getFolderById(requiredProp_("VOICE_FOLDER_ID"));
       const file = folder.createFile(blob);
       ss.getSheetByName("VoiceMessages").appendRow([now, name, file.getId(), file.getName(), duration, type]);
